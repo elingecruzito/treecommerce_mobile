@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return Container(
           child: TextField(
+            obscureText: true,
             decoration: InputDecoration(
               icon: Icon(Icons.vpn_key),
               labelText: 'Contrasena: ',
@@ -98,6 +99,8 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             if(snapshot.hasData){
               _login(context, loginBloc);
+            }else{
+              errorAlert(context, "Error!" ,"Alguno de los datos es incorrecto!");
             }
           }
           // onPressed: _login(context, loginBloc),
