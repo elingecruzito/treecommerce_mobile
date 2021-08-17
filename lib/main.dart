@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
  
 void main() => runApp(MyApp());
+
+final global_color = Colors.teal[300];
  
 class MyApp extends StatelessWidget {
   @override
@@ -14,7 +16,11 @@ class MyApp extends StatelessWidget {
         'login' : (BuildContext context) => LoginPage()
       },
       theme: ThemeData(
-        primaryColor: Colors.greenAccent[300]
+        primaryColor: global_color, 
+        iconTheme: IconThemeData(
+          color: global_color
+        ), 
+        buttonColor: global_color,
       ),
     );
   }
