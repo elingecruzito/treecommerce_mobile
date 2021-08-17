@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
 import 'package:treecommerce/src/provider/provider.dart';
  
@@ -13,9 +14,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Tree commerce',
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: 'home',
         routes: {
-          'login' : (BuildContext context) => LoginPage()
+          'login' : (BuildContext context) => LoginPage(),
+          'home' : (BuildContext context) => HomePage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 
