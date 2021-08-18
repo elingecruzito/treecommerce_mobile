@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             ),
             _buscador((sizeWidth - (sizeIcons * 4))),
             IconButton(
-              icon: Icon(Icons.shopping_bag_outlined, color: Colors.white), 
+              icon: Icon(Icons.shopping_cart_outlined, color: Colors.white), 
               onPressed: () => print('Shopping car!'),
               iconSize: sizeIcons,
             )
@@ -117,11 +117,10 @@ class _HomePageState extends State<HomePage> {
           itemCount: itemList.length,
           pagination: new SwiperPagination(
             builder: new DotSwiperPaginationBuilder(
-              activeColor: Colors.grey
+              activeColor: Colors.grey,
+              size: 5.0, 
+              activeSize: 5.0
             )
-          ),
-          control: new SwiperControl(
-            color: Colors.grey
           ),
         ),
       )
