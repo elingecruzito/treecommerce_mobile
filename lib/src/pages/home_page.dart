@@ -30,12 +30,12 @@ class _HomePageState extends State<HomePage> {
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(10.0)
         // ),
-        backgroundColor: Colors.white,
-        title: Center(child: Text('Home', style: TextStyle(color: Colors.teal[300]))),
+        // backgroundColor: Colors.white,
+        title: _buscador(),
         leading: Container(),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_bag_outlined, color: Colors.teal[300]), 
+            icon: Icon(Icons.shopping_bag_outlined, color: Colors.white), 
             onPressed: () => print('Shopping car!')
           )
         ],
@@ -48,12 +48,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buscador(){
+    return InkWell(
+      onTap: () => print("Buscador....!"),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10.0),
+        child: Container(
+          color: Colors.white,
+          width: double.infinity,
+          height: 32.0,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(Icons.search_outlined, color: Colors.grey, size: 15.0),
+                SizedBox(width: 5.0),
+                Text("Buscar en TreeCommerse", style: TextStyle(color: Colors.grey, fontSize: 12.0))
+              ]
+            ),
+          )
+        ),
+      ),
+    );
+  }
+
   Widget _carousel(BuildContext context) {
     
 
     return Container(
       width: double.infinity,
-      height: 300.0,
+      height: 200.0,
       padding: EdgeInsets.all(5.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
@@ -65,8 +89,14 @@ class _HomePageState extends State<HomePage> {
             return itemList[index];
           },
           itemCount: itemList.length,
-          pagination: new SwiperPagination(),
-          control: new SwiperControl(),
+          pagination: new SwiperPagination(
+            builder: new DotSwiperPaginationBuilder(
+              activeColor: Colors.grey
+            )
+          ),
+          control: new SwiperControl(
+            color: Colors.grey
+          ),
         ),
       )
     );
