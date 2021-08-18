@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   rxdart:
   path_provider:
+  flutter_swiper:
 
 dev_dependencies:
   flutter_test:
