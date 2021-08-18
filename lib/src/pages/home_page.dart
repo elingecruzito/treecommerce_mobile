@@ -26,36 +26,52 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(10.0)
-        // ),
-        // backgroundColor: Colors.white,
-        title: _buscador(),
-        leading: Container(),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_bag_outlined, color: Colors.white), 
-            onPressed: () => print('Shopping car!')
-          )
-        ],
-      ),
       body: Column(
         children: [
+          _customAppBar(),
           _carousel(context),
         ],
       ),
     );
   }
 
-  Widget _buscador(){
+  Widget _customAppBar(){
+
+    final double sizeIcons = 25.0;
+    final sizeWidth = MediaQuery.of(context).size.width;
+
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        height: 50.0,
+        color: Colors.teal[300],
+        child: Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.dehaze, color: Colors.white), 
+              onPressed: () => print('Configuration...!'),
+              iconSize: sizeIcons
+            ),
+            _buscador((sizeWidth - (sizeIcons * 4))),
+            IconButton(
+              icon: Icon(Icons.shopping_bag_outlined, color: Colors.white), 
+              onPressed: () => print('Shopping car!'),
+              iconSize: sizeIcons,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buscador(double width){
     return InkWell(
       onTap: () => print("Buscador....!"),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Container(
           color: Colors.white,
-          width: double.infinity,
+          width: width,
           height: 32.0,
           child: Padding(
             padding: EdgeInsets.all(8.0),
@@ -73,9 +89,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _carousel(BuildContext context) {
-    
-
     return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Colors.teal[300],
+            Colors.teal[200],
+            Colors.teal[100],
+            Colors.white
+          ]
+        )
+      ),
       width: double.infinity,
       height: 200.0,
       padding: EdgeInsets.all(5.0),
