@@ -8,7 +8,7 @@ class CardSwiper extends StatelessWidget {
   
   List<ProductosModel> items;
   final _pageController = new PageController(
-    initialPage: 1,
+    initialPage: 0,
     viewportFraction: 0.5,
   );
 
@@ -48,10 +48,28 @@ class CardSwiper extends StatelessWidget {
               height: 120.0,
             ),
           ),
-          Text(
-            item.g01Name,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.caption
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${item.g01Precio}',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 20.0
+                  )
+                ),
+                SizedBox(height: 5.0),
+                Text(
+                  item.g01Name,
+                  style: TextStyle(
+                    fontSize: 12.0
+                  ),
+                )
+              ]
+            ),
           )
         ],
       ),

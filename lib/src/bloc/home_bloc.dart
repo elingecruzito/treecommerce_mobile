@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:treecommerce/src/model/productos_model.dart';
 
 class HomeBloc{
 
   final ProductosModel _productosModel = ProductosModel();
+  final random = new Random();
 
   Future<List<ProductosModel>> getOnSale() async{
 
@@ -15,7 +17,7 @@ class HomeBloc{
       _list.add(new ProductosModel(
         g01Id: i,
         g01Name: "Producto " + (i + 1).toString(), 
-        g01Precio: "\$ 0.0",
+        g01Precio: "\$ ${ random.nextInt(999).toDouble() }",
         g01Descripcion: "Esta es una descripcion...", 
         g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
       ));
