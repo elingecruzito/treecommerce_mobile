@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
 
 class Provider extends InheritedWidget {
 
   final _loginBloc = new LoginBloc();
+  final _homeBloc = new HomeBloc();
 
   static Provider _instancia;
 
@@ -22,5 +24,8 @@ class Provider extends InheritedWidget {
 
   static LoginBloc loginBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._loginBloc;
+
+    static HomeBloc homeBloc(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._homeBloc;
 
 }

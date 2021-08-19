@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:treecommerce/src/bloc/home_bloc.dart';
+import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/widgets/card_swiper_widget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key key }) : super(key: key);
@@ -21,16 +24,24 @@ class _HomePageState extends State<HomePage> {
     ].map((item) => 
             Image.network(item, fit: BoxFit.cover)
           ).toList();
+
+    HomeBloc _homeBloc;
   
 
   @override
   Widget build(BuildContext context) {
+
+    
+
     return Scaffold(
-      body: Column(
-        children: [
-          _customAppBar(),
-          _carousel(context),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            _customAppBar(),
+            _carousel(context),
+            _onSale(context),
+          ],
+        ),
       ),
     );
   }
@@ -40,26 +51,24 @@ class _HomePageState extends State<HomePage> {
     final double sizeIcons = 25.0;
     final sizeWidth = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: 50.0,
-        color: Colors.teal[300],
-        child: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.dehaze, color: Colors.white), 
-              onPressed: () => print('Configuration...!'),
-              iconSize: sizeIcons
-            ),
-            _buscador((sizeWidth - (sizeIcons * 4))),
-            IconButton(
-              icon: Icon(Icons.shopping_cart_outlined, color: Colors.white), 
-              onPressed: () => print('Shopping car!'),
-              iconSize: sizeIcons,
-            )
-          ],
-        ),
+    return Container(
+      width: double.infinity,
+      height: 50.0,
+      color: Colors.teal[300],
+      child: Row(
+        children: [
+          IconButton(
+            icon: Icon(Icons.dehaze, color: Colors.white), 
+            onPressed: () => print('Configuration...!'),
+            iconSize: sizeIcons
+          ),
+          _buscador((sizeWidth - (sizeIcons * 4))),
+          IconButton(
+            icon: Icon(Icons.shopping_cart_outlined, color: Colors.white), 
+            onPressed: () => print('Shopping car!'),
+            iconSize: sizeIcons,
+          )
+        ],
       ),
     );
   }
@@ -125,44 +134,36 @@ class _HomePageState extends State<HomePage> {
         ),
       )
     );
+  }
 
-    // return Column(
-    //   children: <Widget>[
-    //     CarouselSlider(
-    //       items: imgList.map((item) => 
-    //         Image.network(item, fit: BoxFit.cover)
-    //       ).toList(),
-    //       carouselController: _controller,
-    //       options: CarouselOptions(
-    //         autoPlay: true,
-    //         enlargeCenterPage: true,
-    //         aspectRatio: 2.0,
-    //         onPageChanged: (index, reason) =>
-    //           setState(() => _current = index)
-    //       ),
-    //     ),
-    //     Row(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: imgList.asMap().entries.map((entry){
-    //         return GestureDetector(
-    //           onTap: ()=> _controller.animateToPage(entry.key),
-    //           child: Container(
-    //             width: 7.0,
-    //             height: 7.0,
-    //             margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-    //             decoration: BoxDecoration(
-    //               shape: BoxShape.circle,
-    //               color: (
-    //                       Theme.of(context).brightness == Brightness.dark
-    //                       ? Colors.white 
-    //                       : Colors.black
-    //                     ).withOpacity(_current == entry.key ? 0.9 : 0.4)
-    //             ),
-    //           ),
-    //         );
-    //       }).toList(),
-    //     )
-    //   ]
-    // );
+  Widget _onSale(BuildContext context) {
+
+    _homeBloc = Provider.homeBloc(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+          Container(
+            margin: EdgeInsets.all(5.0),
+            child: Text(
+              'Ofertas', 
+              style: TextStyle(
+                fontSize: 20.0, 
+                color: Colors.black54
+              )
+            ),
+          ),
+          Container(
+          width: double.infinity,
+          height: 200.0,
+          child: FutureBuilder(
+            future: _homeBloc.getOnSale(),
+            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+              return CardSwiper(items: snapshot.data);
+            }
+          ),
+        ),
+      ]
+    );
   }
 }
