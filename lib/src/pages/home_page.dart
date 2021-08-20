@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:treecommerce/src/bloc/home_bloc.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/widgets/card_swiper_widget.dart';
 
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    
+    _homeBloc = Provider.homeBloc(context);
 
     return Scaffold(
       body: SafeArea(
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             _customAppBar(),
             _carousel(context),
+            _lastView(),
             _onSale(context),
           ],
         ),
@@ -136,9 +138,90 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _onSale(BuildContext context) {
+  Widget _lastView(){
 
-    _homeBloc = Provider.homeBloc(context);
+    ProductosModel _lastView = _homeBloc.getLastView();
+
+    final _border = BorderSide(
+                    width: 0.5,
+                    color: Colors.grey[300],
+                    style: BorderStyle.solid
+                  );
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(10.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0)
+        ),
+        elevation: 10.0,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              child: Text('Visto recientemnete', style: TextStyle(fontWeight: FontWeight.bold)),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: _border
+                ),
+              ),
+            ), 
+            Container(
+              width: double.infinity,
+              child: Row(
+                children: [
+                  FadeInImage(
+                    placeholder: AssetImage('assets/img/no-image.jpg'),
+                    image: NetworkImage(_lastView.g01Imagens),
+                    fit: BoxFit.cover,
+                    height: 120.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text( 
+                        _lastView.g01Name,
+                        style: TextStyle(
+                          fontSize: 15.0
+                        ),
+                      ), 
+                      Text( 
+                        _lastView.g01Precio, 
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0
+                        )
+                      )
+                    ],
+                  )
+                ]
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              decoration: BoxDecoration(
+                border: Border( 
+                  top: _border
+                )
+              ),
+              child: Text(
+                'Ver historia de navegacion', 
+                style: TextStyle(
+                  fontWeight: FontWeight.bold, 
+                  color: Colors.blue
+                )
+              ),
+            ), 
+          ]
+        ),
+      ),
+    );
+  }
+  
+  Widget _onSale(BuildContext context) {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +242,17 @@ class _HomePageState extends State<HomePage> {
           child: FutureBuilder(
             future: _homeBloc.getOnSale(),
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              return CardSwiper(items: snapshot.data);
+              if(snapshot.hasData){
+                return CardSwiper(items: snapshot.data);
+              }else{
+                return Container(
+                  width: double.infinity,
+                  child: Center(
+                    child: CircularProgressIndicator()
+                  )
+                );
+              }
+              
             }
           ),
         ),

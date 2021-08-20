@@ -26,4 +26,17 @@ class HomeBloc{
     return _list;
   }
 
+  ProductosModel getLastView(){
+
+    int _id = random.nextInt(999);
+    
+    return new ProductosModel(
+        g01Id: _id,
+        g01Name: "Producto ${ _id }", 
+        g01Precio: "\$ ${ random.nextInt(999).toDouble() }",
+        g01Descripcion: "Esta es una descripcion...", 
+        g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
+    );
+  }
+
 }
