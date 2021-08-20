@@ -45,6 +45,8 @@ class _HomePageState extends State<HomePage> {
               _carousel(context),
               _lastView(),
               _onSale(context),
+              _inspirated(),
+              _history(),
             ],
           ),
         ),
@@ -153,12 +155,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
   
-  Widget _onSale(BuildContext context) {
-
-    final _content = Container(
+  Widget _getListProducts(Future<List<ProductosModel>> result){
+    return Container(
       width: double.infinity,
       child: FutureBuilder(
-        future: _homeBloc.getOnSale(),
+        future: result,
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if(snapshot.hasData){
             return Column(
@@ -180,11 +181,31 @@ class _HomePageState extends State<HomePage> {
         }
       ),
     );
+  }
+  
+  Widget _onSale(BuildContext context) {
 
     return CardView(
       titleCard: "Ofertas", 
-      contentCard: _content,
+      contentCard: _getListProducts( _homeBloc.getOnSale() ),
       footerCard: "Ver todas las ofertas",
+    );
+  }
+
+  Widget _inspirated() {
+
+    return CardView(
+      titleCard: "Inpirado en lo ultimo que viste", 
+      contentCard: _getListProducts( _homeBloc.inspiratedOnLastView() ),
+      footerCard: "Ver mas",
+    );
+  }
+
+  Widget _history() {
+    return CardView(
+      titleCard: "Historial de navegacion", 
+      contentCard: _getListProducts( _homeBloc.historyViews() ),
+      footerCard: "Ver historial de navegacion",
     );
   }
 }
