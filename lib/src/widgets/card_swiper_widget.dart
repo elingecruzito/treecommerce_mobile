@@ -14,8 +14,6 @@ class CardSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final _screanSize = MediaQuery.of(context).size;
     
     return Container(
       child: PageView.builder(

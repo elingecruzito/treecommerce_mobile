@@ -13,7 +13,7 @@ class HomeBloc{
 
     List<ProductosModel> _list = new List<ProductosModel>();
 
-    for(int i = 0; i < 10; i++ ){
+    for(int i = 0; i < 3; i++ ){
       _list.add(new ProductosModel(
         g01Id: i,
         g01Name: "Producto " + (i + 1).toString(), 
