@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
+import 'package:treecommerce/src/pages/search_page.dart';
 import 'package:treecommerce/src/provider/provider.dart';
  
 void main() => runApp(MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'login' : (BuildContext context) => LoginPage(),
           'home' : (BuildContext context) => HomePage(),
+          'search' : (BuildContext context) => SearchPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

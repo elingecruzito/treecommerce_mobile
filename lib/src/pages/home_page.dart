@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buscador(double width){
     return InkWell(
-      onTap: () => print("Buscador....!"),
+      onTap: () => Navigator.pushNamed(context, 'search'),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
         child: Container(
