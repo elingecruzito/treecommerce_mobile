@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
+import 'package:treecommerce/src/pages/list_products_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
 import 'package:treecommerce/src/pages/search_page.dart';
 import 'package:treecommerce/src/provider/provider.dart';
@@ -16,12 +17,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Tree commerce',
         debugShowCheckedModeBanner: false,
-        initialRoute: 'home',
+        initialRoute: 'list',
         routes: {
           'login' : (BuildContext context) => LoginPage(),
           'home' : (BuildContext context) => HomePage(),
           'search' : (BuildContext context) => SearchPage(),
-          'error' : (BuildContext context) => ErrorPage()
+          'error' : (BuildContext context) => ErrorPage(),
+          'list' : (BuildContext context) => ListProductsPage()
         },
         theme: ThemeData(
           primaryColor: global_color, 
