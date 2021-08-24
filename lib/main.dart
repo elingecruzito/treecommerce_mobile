@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
 import 'package:treecommerce/src/pages/search_page.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
           'login' : (BuildContext context) => LoginPage(),
           'home' : (BuildContext context) => HomePage(),
           'search' : (BuildContext context) => SearchPage(),
+          'error' : (BuildContext context) => ErrorPage()
         },
         theme: ThemeData(
           primaryColor: global_color, 

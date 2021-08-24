@@ -21,21 +21,21 @@ class DrawerCustom extends StatelessWidget {
         child: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
-            children: _items(),
+            children: _items(context),
           )
         ),
       ),
     );
   }
 
-  List<Widget> _items(){
+  List<Widget> _items(BuildContext context){
     List<Widget> _items = new List<Widget>();
     _items.add( _headerDrawer() );
 
     menuOptions().forEach( (opt) { 
       _items.add(
         GestureDetector(
-          onTap: ()=> print("Ir a ${ opt["route"] }...!"),
+          onTap: ()=> Navigator.pushNamed(context, 'error'),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             decoration: BoxDecoration(

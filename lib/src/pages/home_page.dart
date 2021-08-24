@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           _buscador((sizeWidth - (sizeIcons * 4))),
           IconButton(
             icon: Icon(Icons.shopping_cart_outlined, color: Colors.white), 
-            onPressed: () => print('Shopping car!'),
+            onPressed: () => Navigator.pushNamed(context, 'error'),
             iconSize: sizeIcons,
           )
         ],

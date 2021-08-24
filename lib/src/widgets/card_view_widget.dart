@@ -33,7 +33,7 @@ class CardView extends StatelessWidget {
           children: [
             _header(),
             this.contentCard,
-            _footer(),
+            _footer(context),
           ]
         ),
       ),
@@ -53,12 +53,12 @@ class CardView extends StatelessWidget {
     );
   }
 
-  Widget _footer() {
+  Widget _footer(BuildContext context) {
     if(this.footerCard == null ){
       return Container();
     }else{
       return GestureDetector(
-        onTap: () => print('Function Card View...!'),
+        onTap: () => Navigator.pushNamed(context, 'error'),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
