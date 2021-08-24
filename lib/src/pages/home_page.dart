@@ -4,9 +4,9 @@ import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/widgets/card_product_widget.dart';
-import 'package:treecommerce/src/widgets/card_swiper_widget.dart';
 import 'package:treecommerce/src/widgets/card_view_widget.dart';
 import 'package:treecommerce/src/widgets/drawer_widget.dart';
+import 'package:treecommerce/src/utilerias/utils.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key key }) : super(key: key);
@@ -19,18 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   HomeBloc _homeBloc;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final _decorationGradient = BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: <Color>[
-        Colors.teal[300],
-        Colors.teal[200],
-        Colors.teal[100],
-        Colors.white
-      ]
-    )
-  );
+  final _decorationGradient = getDecorationGradient();
 
   @override
   Widget build(BuildContext context) {
