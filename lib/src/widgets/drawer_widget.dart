@@ -5,6 +5,7 @@ class DrawerCustom extends StatelessWidget {
   DrawerCustom({ @required this.decoration });
 
   Decoration decoration;
+  final _color_font = Colors.black54;
 
   final _border = BorderSide(
       width: 0.5,
@@ -44,12 +45,22 @@ class DrawerCustom extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(opt["icon"], color: Colors.black),
+                Icon(opt["icon"], color: _color_font),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                     opt["title"],
-                    style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+                    style: TextStyle(fontWeight: FontWeight.w600, color: _color_font),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.arrow_forward_ios_outlined, 
+                      color: _color_font, 
+                      size: 10.0
+                    ),
                   ),
                 )
               ],
@@ -77,7 +88,8 @@ class DrawerCustom extends StatelessWidget {
                   'Hola Andres Garcia',
                   style: TextStyle(
                     fontSize: 12.0,
-                    fontWeight: FontWeight.w600
+                    fontWeight: FontWeight.w600,
+                    color: _color_font,
                   ),
                 )
               ],
