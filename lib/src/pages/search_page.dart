@@ -76,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
         itemCount: items.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => print(items[index]),
+            onTap: () => Navigator.pushNamed(context, 'list'),
             child: Container(
               padding: EdgeInsets.all(10.0),
               child: Row(

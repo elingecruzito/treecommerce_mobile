@@ -34,7 +34,7 @@ class DrawerCustom extends StatelessWidget {
     menuOptions().forEach( (opt) { 
       _items.add(
         GestureDetector(
-          onTap: ()=> Navigator.pushNamed(context, 'error'),
+          onTap: ()=> Navigator.pushNamed(context, opt['route']),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             decoration: BoxDecoration(
@@ -114,32 +114,32 @@ class DrawerCustom extends StatelessWidget {
       {
         "title" : "Notificaciones",
         "icon" : Icons.notifications_active_outlined,
-        "route" : "notifications"
+        "route" : "error"
       },
       {
         "title" : "Mis compras",
         "icon" : Icons.shopping_cart_outlined,
-        "route" : "shop"
+        "route" : "error"
       },
       {
         "title" : "Fravoritos",
         "icon" : Icons.favorite_border_outlined,
-        "route" : "favorites"
+        "route" : "error"
       },
       {
         "title" : "Ofertas",
         "icon" : Icons.local_offer_outlined,
-        "route" : "onSale"
+        "route" : "error"
       },
       {
         "title" : "Historial",
         "icon" : Icons.access_alarms_outlined,
-        "route" : "history"
+        "route" : "error"
       },
       {
         "title" : "Mi cuenta",
         "icon" : Icons.person_outline,
-        "route" : "user"
+        "route" : "error"
       },
     ];
   }

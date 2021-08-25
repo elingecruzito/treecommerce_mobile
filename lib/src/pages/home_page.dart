@@ -93,7 +93,8 @@ class _HomePageState extends State<HomePage> {
     return CardView(
       titleCard: "Visto recientemente", 
       footerCard: "Ver historia de navegacion", 
-      contentCard: CardProduct(producto: _lastView,)
+      contentCard: CardProduct(producto: _lastView),
+      routeFooterCard: 'list',
     );
   }
   
@@ -131,6 +132,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Ofertas", 
       contentCard: _getListProducts( _homeBloc.getOnSale() ),
       footerCard: "Ver todas las ofertas",
+      routeFooterCard: 'list',
     );
   }
 
@@ -140,6 +142,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Inpirado en lo ultimo que viste", 
       contentCard: _getListProducts( _homeBloc.inspiratedOnLastView() ),
       footerCard: "Ver mas",
+      routeFooterCard: 'list',
     );
   }
 
@@ -148,6 +151,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Historial de navegacion", 
       contentCard: _getListProducts( _homeBloc.historyViews() ),
       footerCard: "Ver historial de navegacion",
+      routeFooterCard: 'list',
     );
   }
 }

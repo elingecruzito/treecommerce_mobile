@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Tree commerce',
         debugShowCheckedModeBanner: false,
-        initialRoute: 'list',
+        initialRoute: 'home',
         routes: {
           'login' : (BuildContext context) => LoginPage(),
           'home' : (BuildContext context) => HomePage(),

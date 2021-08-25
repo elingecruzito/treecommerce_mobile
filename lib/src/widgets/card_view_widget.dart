@@ -4,12 +4,14 @@ class CardView extends StatelessWidget {
 
   CardView({ 
     @required this.titleCard, 
+    @required this.contentCard,
     this.footerCard, 
-    @required this.contentCard 
+    this.routeFooterCard
   });
 
   String titleCard;
   String footerCard = null;
+  String routeFooterCard;
   Widget contentCard;
 
   final _border = BorderSide(
@@ -58,7 +60,7 @@ class CardView extends StatelessWidget {
       return Container();
     }else{
       return GestureDetector(
-        onTap: () => Navigator.pushNamed(context, 'error'),
+        onTap: () => Navigator.pushNamed(context, this.routeFooterCard),
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
