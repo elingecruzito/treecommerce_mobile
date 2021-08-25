@@ -19,21 +19,21 @@ class _HomePageState extends State<HomePage> {
 
   HomeBloc _homeBloc;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final _decorationGradient = getDecorationGradient();
 
   @override
   Widget build(BuildContext context) {
 
     _homeBloc = Provider.homeBloc(context);
+    final sizeWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer: DrawerCustom( decoration: _decorationGradient ),
+      drawer: DrawerCustom(),
+      appBar: appBarSearch(context),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             children: [
-              _customAppBar(),
               _carousel(context),
               _lastView(),
               _onSale(context),
@@ -41,57 +41,6 @@ class _HomePageState extends State<HomePage> {
               _history(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _customAppBar(){
-
-    final double sizeIcons = 25.0;
-    final sizeWidth = MediaQuery.of(context).size.width;
-
-    return Container(
-      width: double.infinity,
-      height: 50.0,
-      color: Colors.teal[300],
-      child: Row(
-        children: [
-          IconButton(
-            icon: Icon(Icons.dehaze, color: Colors.white), 
-            onPressed: () => _scaffoldKey.currentState.openDrawer(),
-            iconSize: sizeIcons
-          ),
-          _buscador((sizeWidth - (sizeIcons * 4))),
-          IconButton(
-            icon: Icon(Icons.shopping_cart_outlined, color: Colors.white), 
-            onPressed: () => Navigator.pushNamed(context, 'error'),
-            iconSize: sizeIcons,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buscador(double width){
-    return InkWell(
-      onTap: () => Navigator.pushNamed(context, 'search'),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Container(
-          color: Colors.white,
-          width: width,
-          height: 32.0,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Icon(Icons.search_outlined, color: Colors.grey, size: 15.0),
-                SizedBox(width: 5.0),
-                Text("Buscar en TreeCommerse", style: TextStyle(color: Colors.grey, fontSize: 12.0))
-              ]
-            ),
-          )
         ),
       ),
     );
@@ -111,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     ).toList();
 
     return Container(
-      decoration: _decorationGradient,
+      decoration: getDecorationGradient(),
       width: double.infinity,
       height: 200.0,
       padding: EdgeInsets.all(5.0),

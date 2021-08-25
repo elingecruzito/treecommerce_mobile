@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/utilerias/utils.dart';
 
 class DrawerCustom extends StatelessWidget {
-  
-  DrawerCustom({ @required this.decoration });
 
-  Decoration decoration;
+  final Decoration decoration = getDecorationGradient();
   final _color_font = Colors.black54;
 
   final _border = BorderSide(

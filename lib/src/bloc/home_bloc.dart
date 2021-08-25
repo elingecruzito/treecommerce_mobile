@@ -58,5 +58,4 @@ class HomeBloc{
     return getTestProducts(3);
 
   }
-
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
+import 'package:treecommerce/src/bloc/search_bloc.dart';
 
 class Provider extends InheritedWidget {
 
   final _loginBloc = new LoginBloc();
   final _homeBloc = new HomeBloc();
+  final _searchBlock = new SearchBloc();
 
   static Provider _instancia;
 
@@ -25,7 +27,10 @@ class Provider extends InheritedWidget {
   static LoginBloc loginBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._loginBloc;
 
-    static HomeBloc homeBloc(BuildContext context)
+  static HomeBloc homeBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._homeBloc;
+
+  static SearchBloc searchBloc(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._searchBlock;
 
 }
