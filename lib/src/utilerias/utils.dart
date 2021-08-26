@@ -89,3 +89,8 @@ Widget _buscador(BuildContext context){
     ),
   );
 }
+
+String parseDate(DateTime _time){
+  final _months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  return '${_time.day} de ${ _months[ _time.month + 1 ] }';
+}

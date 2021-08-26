@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
+import 'package:treecommerce/src/pages/buys_page.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/list_products_page.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           'error' : (BuildContext context) => ErrorPage(),
           'list' : (BuildContext context) => ListProductsPage(),
           'notifications' : (BuildContext context) => NotificationsPage(),
+          'buys' : (BuildContext context) => BuysPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

@@ -119,7 +119,7 @@ class DrawerCustom extends StatelessWidget {
       {
         "title" : "Mis compras",
         "icon" : Icons.shopping_cart_outlined,
-        "route" : "error"
+        "route" : "buys"
       },
       {
         "title" : "Fravoritos",
