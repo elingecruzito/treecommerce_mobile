@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/list_products_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
+import 'package:treecommerce/src/pages/notifications_page.dart';
 import 'package:treecommerce/src/pages/search_page.dart';
 import 'package:treecommerce/src/provider/provider.dart';
  
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
           'home' : (BuildContext context) => HomePage(),
           'search' : (BuildContext context) => SearchPage(),
           'error' : (BuildContext context) => ErrorPage(),
-          'list' : (BuildContext context) => ListProductsPage()
+          'list' : (BuildContext context) => ListProductsPage(),
+          'notifications' : (BuildContext context) => NotificationsPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

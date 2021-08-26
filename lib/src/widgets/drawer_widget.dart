@@ -114,7 +114,7 @@ class DrawerCustom extends StatelessWidget {
       {
         "title" : "Notificaciones",
         "icon" : Icons.notifications_active_outlined,
-        "route" : "error"
+        "route" : "notifications"
       },
       {
         "title" : "Mis compras",
