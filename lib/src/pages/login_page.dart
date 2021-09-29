@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
+import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/login_service.dart';
 import 'package:treecommerce/src/utilerias/messages.dart';
@@ -125,10 +126,7 @@ class _LoginPageState extends State<LoginPage> {
 
         if( value != null ){
 
-          pref.setInt("id", value.id);
-          pref.setString("name", value.name);
-          pref.setString("remember_token", value.rememberToken);
-
+          pref.setString("userModel", userModelToJson(value));
           Navigator.pushReplacementNamed(context, "home");
 
         }else{

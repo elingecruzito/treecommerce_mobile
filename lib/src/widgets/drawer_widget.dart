@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 
-class DrawerCustom extends StatelessWidget {
+
+class DrawerCustom extends StatefulWidget {
+
+  @override
+  _DrawerCustomState createState() => _DrawerCustomState();
+}
+
+class _DrawerCustomState extends State<DrawerCustom> {
 
   final Decoration decoration = getDecorationGradient();
   final _color_font = Colors.black54;
+  UserModel _userModel;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    _userModel = new UserModel();
+    _userModel.id = 0;
+    _userModel.name = "";
+    _userModel.email = "";
+    _userModel.rememberToken = "";
+
+    _getLoadPreferences();
+  }
+
+  _getLoadPreferences() async {
+    final pref = await SharedPreferences.getInstance();
+    final _model = pref.getString("userModel");
+    setState(() {
+      _userModel = userModelFromJson(_model);
+    });
+  }
 
   final _border = BorderSide(
       width: 0.5,
@@ -73,6 +104,7 @@ class DrawerCustom extends StatelessWidget {
   } 
 
   Widget _headerDrawer(){
+
     return DrawerHeader(
       decoration: this.decoration,
       child: Row(
@@ -84,7 +116,7 @@ class DrawerCustom extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Hola Andres Garcia',
+                  'Hola ' + _userModel.name,
                   style: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w600,
@@ -143,4 +175,5 @@ class DrawerCustom extends StatelessWidget {
       },
     ];
   }
+
 }
