@@ -12,6 +12,8 @@ class LauncherPage extends StatefulWidget {
 
 class _LauncherPageState extends State<LauncherPage> {
 
+  bool _saving = false;
+
   @override
   void initState() {
     super.initState();
@@ -22,10 +24,11 @@ class _LauncherPageState extends State<LauncherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Launcher!!"),
+        child: CircularProgressIndicator(),
       ),
     );
   }
+
   
   _getInitialRoute(){
 
