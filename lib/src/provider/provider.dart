@@ -4,6 +4,7 @@ import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
+import 'package:treecommerce/src/utilerias/messages.dart';
 
 class Provider extends InheritedWidget {
 
@@ -12,6 +13,8 @@ class Provider extends InheritedWidget {
   final _searchBloc = new SearchBloc();
   final _notificationsBloc = new NotificationsBloc();
   final _buysBloc = new BuysBloc();
+
+  final _messages = new Messages();
 
   static Provider _instancia;
 
@@ -27,6 +30,9 @@ class Provider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(Provider oldWidget) => true;
+
+  static Messages messages(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._messages;
 
   static LoginBloc loginBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._loginBloc;

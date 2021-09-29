@@ -20,6 +20,7 @@ class LoginService{
     if(resp.statusCode == 200){
       return userModelFromJson(resp.body.toString());
     }else{
+      print(resp.body);
       return null;
     }
   }

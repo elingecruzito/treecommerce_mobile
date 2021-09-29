@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
-import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/login_service.dart';
+import 'package:treecommerce/src/utilerias/messages.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,11 +18,15 @@ class _LoginPageState extends State<LoginPage> {
   final _padding_lr = 20.0;
   final _padding_tb = 250.0;
   LoginService _loginService;
+  Messages _messages;
+
   @override
   Widget build(BuildContext context) {
 
     final _loginBloc = Provider.loginBloc(context);
     _loginService = new LoginService();
+
+    _messages = Provider.messages(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -104,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
             if(snapshot.hasData){
               _login(context, loginBloc);
             }else{
-              errorAlert(context, "Error!" ,"Alguno de los datos es incorrecto!");
+              errorAlert(context, _messages.TITLE_ERROR , _messages.LOGIN_ERROR_HASDATA);
             }
           }
         );
@@ -112,11 +117,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _login(BuildContext context, LoginBloc loginBloc) {
+  _login(BuildContext context, LoginBloc loginBloc) async {
+
+    final pref = await SharedPreferences.getInstance();
     
     _loginService.authentificate(loginBloc).then( (value){
+
         if( value != null ){
-          print(value.toJson());
+
+          pref.setInt("id", value.id);
+          pref.setString("name", value.name);
+          pref.setString("remember_token", value.rememberToken);
+
+          Navigator.pushReplacementNamed(context, "home");
+
+        }else{
+
+          errorAlert(context, _messages.TITLE_ERROR, _messages.LOGIN_ERROR_AUTHENTIFICATE);
+
         }
       }
     );
