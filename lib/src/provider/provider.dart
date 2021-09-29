@@ -5,6 +5,7 @@ import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
 import 'package:treecommerce/src/utilerias/messages.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 
 class Provider extends InheritedWidget {
 
@@ -13,6 +14,7 @@ class Provider extends InheritedWidget {
   final _searchBloc = new SearchBloc();
   final _notificationsBloc = new NotificationsBloc();
   final _buysBloc = new BuysBloc();
+  final _userPreferences = new UserPreferences();
 
   final _messages = new Messages();
 
@@ -48,5 +50,8 @@ class Provider extends InheritedWidget {
   
   static BuysBloc buysBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._buysBloc;
+
+  static UserPreferences userPreferences(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._userPreferences;
 
 }

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 
 class LauncherPage extends StatefulWidget {
   LauncherPage({Key key}) : super(key: key);
@@ -12,7 +14,7 @@ class LauncherPage extends StatefulWidget {
 
 class _LauncherPageState extends State<LauncherPage> {
 
-  bool _saving = false;
+  UserPreferences _preferences;
 
   @override
   void initState() {
@@ -22,6 +24,9 @@ class _LauncherPageState extends State<LauncherPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    _preferences = Provider.userPreferences(context);
+
     return Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
@@ -32,9 +37,8 @@ class _LauncherPageState extends State<LauncherPage> {
   
   _getInitialRoute(){
 
-    Timer(Duration(seconds: 5), () async {
-      final pref = await SharedPreferences.getInstance();
-      if( pref.getKeys().isEmpty ){
+    Timer(Duration(seconds: 5), () {
+      if( _preferences.userExist() ){
         Navigator.pushReplacementNamed(context, "login");
       }else{
         Navigator.pushReplacementNamed(context, "home");

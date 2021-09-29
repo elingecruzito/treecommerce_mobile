@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:treecommerce/src/pages/account_page.dart';
 import 'package:treecommerce/src/pages/buys_page.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
@@ -9,8 +9,14 @@ import 'package:treecommerce/src/pages/login_page.dart';
 import 'package:treecommerce/src/pages/notifications_page.dart';
 import 'package:treecommerce/src/pages/search_page.dart';
 import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
  
-void main() => runApp(MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final _userPreferences = new UserPreferences();
+  await _userPreferences.initPrefs();
+  runApp(MyApp());
+}
 
 final global_color = Colors.teal[300];
  
@@ -33,6 +39,7 @@ class MyApp extends StatelessWidget {
           'list' : (BuildContext context) => ListProductsPage(),
           'notifications' : (BuildContext context) => NotificationsPage(),
           'buys' : (BuildContext context) => BuysPage(),
+          'account' : (BuildContext context) => AccountPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

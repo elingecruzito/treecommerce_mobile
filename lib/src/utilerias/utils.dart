@@ -41,6 +41,20 @@ BoxDecoration getDecorationGradient() => _decorationGradient;
 
 BorderSide getBorder() => _border;
 
+AppBar simpleAppBar(BuildContext context, String title){
+  final double _sizeIcons = 25.0;
+  
+  return AppBar(
+      backgroundColor: Colors.teal[300],
+      title: Text(title, style: TextStyle(color: Colors.white)),
+      iconTheme: IconThemeData(
+        color: Colors.white,
+        size: _sizeIcons
+      ),
+      elevation: 0,
+    );
+}
+
 AppBar appBarSearch(BuildContext context){
 
   final double _sizeIcons = 25.0;

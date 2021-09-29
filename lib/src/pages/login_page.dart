@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
-import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/login_service.dart';
 import 'package:treecommerce/src/utilerias/messages.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,9 +19,12 @@ class _LoginPageState extends State<LoginPage> {
   final _padding_tb = 250.0;
   LoginService _loginService;
   Messages _messages;
+  UserPreferences _preferences;
 
   @override
   Widget build(BuildContext context) {
+
+    _preferences = Provider.userPreferences(context);
 
     final _loginBloc = Provider.loginBloc(context);
     _loginService = new LoginService();
@@ -118,15 +120,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _login(BuildContext context, LoginBloc loginBloc) async {
-
-    final pref = await SharedPreferences.getInstance();
+  _login(BuildContext context, LoginBloc loginBloc) {
     
     _loginService.authentificate(loginBloc).then( (value){
 
         if( value != null ){
 
-          pref.setString("userModel", userModelToJson(value));
+          _preferences.userModel(value);
           Navigator.pushReplacementNamed(context, "home");
 
         }else{

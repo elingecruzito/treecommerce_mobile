@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:treecommerce/src/model/user_model.dart';
+import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 
 
@@ -14,28 +16,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
 
   final Decoration decoration = getDecorationGradient();
   final _color_font = Colors.black54;
-  UserModel _userModel;
-
-  @override
-  void initState() {
-    super.initState();
-    
-    _userModel = new UserModel();
-    _userModel.id = 0;
-    _userModel.name = "";
-    _userModel.email = "";
-    _userModel.rememberToken = "";
-
-    _getLoadPreferences();
-  }
-
-  _getLoadPreferences() async {
-    final pref = await SharedPreferences.getInstance();
-    final _model = pref.getString("userModel");
-    setState(() {
-      _userModel = userModelFromJson(_model);
-    });
-  }
+  UserPreferences _preferences;
 
   final _border = BorderSide(
       width: 0.5,
@@ -45,6 +26,9 @@ class _DrawerCustomState extends State<DrawerCustom> {
 
   @override
   Widget build(BuildContext context) {
+
+    _preferences = Provider.userPreferences(context);
+
     return SafeArea(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10.0),
@@ -116,7 +100,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Hola ' + _userModel.name,
+                  'Hola ' + _preferences.name,
                   style: TextStyle(
                     fontSize: 12.0,
                     fontWeight: FontWeight.w600,
@@ -171,7 +155,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
       {
         "title" : "Mi cuenta",
         "icon" : Icons.person_outline,
-        "route" : "error"
+        "route" : "account"
       },
     ];
   }

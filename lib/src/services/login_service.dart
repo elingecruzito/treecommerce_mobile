@@ -2,8 +2,6 @@ import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/utilerias/directions.dart';
 
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class LoginService{

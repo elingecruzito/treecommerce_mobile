@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     _homeBloc = Provider.homeBloc(context);
-    final sizeWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       key: _scaffoldKey,
