@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
+import 'package:treecommerce/src/model/request_model.dart';
+import 'package:treecommerce/src/model/user_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/login_service.dart';
 import 'package:treecommerce/src/utilerias/messages.dart';
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
           child: TextField(
             decoration: InputDecoration(
               icon: Icon(Icons.person),
-              labelText: 'Usuario: ',
+              labelText: 'Correo: ',
               errorText: snapshot.error,
             ),
             onChanged: loginBloc.changeUser,
@@ -124,14 +126,14 @@ class _LoginPageState extends State<LoginPage> {
     
     _loginService.authentificate(loginBloc).then( (value){
 
-        if( value != null ){
-
-          _preferences.userModel(value);
+        if( value.code == _messages.CODE_OK ){
+          
+          _preferences.userModel(UserModel.fromJson(value.body));
           Navigator.pushReplacementNamed(context, "home");
 
         }else{
 
-          errorAlert(context, _messages.TITLE_ERROR, _messages.LOGIN_ERROR_AUTHENTIFICATE);
+          errorAlert(context, _messages.TITLE_ERROR, value.message );
 
         }
       }
