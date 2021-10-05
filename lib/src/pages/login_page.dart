@@ -63,9 +63,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget _fieldUserLogin(LoginBloc loginBloc) {
     return StreamBuilder(
       stream: loginBloc.userStream,
+      // initialData: 'admin@admin.com',
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return Container(
           child: TextField(
+            // controller: TextEditingController(text: 'admin@admin.com'),
             decoration: InputDecoration(
               icon: Icon(Icons.person),
               labelText: 'Correo: ',
@@ -81,10 +83,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _fieldPasswordLogin(LoginBloc loginBloc) {
     return StreamBuilder(
       stream: loginBloc.passwordStream,
+      // initialData: '59xNLVO0',
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return Container(
           child: TextField(
             obscureText: true,
+            // controller: TextEditingController(text: '59xNVLO0'),
             decoration: InputDecoration(
               icon: Icon(Icons.vpn_key),
               labelText: 'Contrasena: ',
@@ -128,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
 
         if( value.code == _messages.CODE_OK ){
           
-          _preferences.userModel(UserModel.fromJson(value.body));
+          _preferences.userModel(userModelFromJson(value.body));
           Navigator.pushReplacementNamed(context, "home");
 
         }else{

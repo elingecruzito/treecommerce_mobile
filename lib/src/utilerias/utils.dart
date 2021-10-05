@@ -108,3 +108,12 @@ String parseDate(DateTime _time){
   final _months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   return '${_time.day} de ${ _months[ _time.month + 1 ] }';
 }
+
+Widget getLoader(){
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 50),
+    child: Center(
+      child: CircularProgressIndicator()
+    )
+  );
+}

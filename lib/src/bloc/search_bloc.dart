@@ -15,11 +15,12 @@ class SearchBloc{
 
     for(int i = 0; i < count; i++ ){
       _list.add(new ProductosModel(
-        g01Id: i,
-        g01Name: "Producto " + (i + 1).toString(), 
-        g01Precio: "\$ ${ random.nextInt(999).toDouble() }",
-        g01Descripcion: "Esta es una descripcion...", 
-        g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
+         id: i,
+        name: "Producto " + (i + 1).toString(), 
+        price: random.nextInt(999).toDouble(),
+        unity: random.nextInt(999),
+        description: "Esta es una descripcion...", 
+        // g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
       ));
     }
 

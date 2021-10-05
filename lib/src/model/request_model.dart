@@ -13,12 +13,12 @@ class RequestModel {
 
     int code;
     String message;
-    Map<String, dynamic> body;
+    String body;
 
-    factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
-        code: json["code"],
-        message: json["message"],
-        body: json["body"],
+    factory RequestModel.fromJson(Map<String, dynamic> data) => RequestModel(
+        code: data["code"],
+        message: data["message"],
+        body: json.encode(data["body"]),
     );
 
     Map<String, dynamic> toJson() => {

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
@@ -83,7 +82,7 @@ class _ListProductsPageState extends State<ListProductsPage> {
             children: [
               FadeInImage(
                 placeholder: AssetImage('assets/img/no-image.jpg'),
-                image: NetworkImage(data.g01Imagens),
+                image: NetworkImage('https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png'),
                 fit: BoxFit.cover,
                 height: 120.0,
               ),
@@ -91,13 +90,13 @@ class _ListProductsPageState extends State<ListProductsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text( 
-                    data.g01Name,
+                    data.name,
                     style: TextStyle(
                       fontSize: 15.0
                     ),
                   ), 
                   Text( 
-                    data.g01Precio, 
+                    "\$ ${ data.price }",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0

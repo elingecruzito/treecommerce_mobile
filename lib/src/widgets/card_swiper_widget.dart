@@ -37,10 +37,10 @@ class CardSwiper extends StatelessWidget {
       child: Column(
         children: [
           Hero(
-            tag: item.g01Id,
+            tag: item.id,
             child: FadeInImage(
               placeholder: AssetImage('assets/img/no-image.jpg'),
-              image: NetworkImage(item.g01Imagens),
+              image: NetworkImage('https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png'),
               fit: BoxFit.cover,
               height: 120.0,
             ),
@@ -52,7 +52,7 @@ class CardSwiper extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${item.g01Precio}',
+                  '${item.price}',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 20.0
@@ -60,7 +60,7 @@ class CardSwiper extends StatelessWidget {
                 ),
                 SizedBox(height: 5.0),
                 Text(
-                  item.g01Name,
+                  item.name,
                   style: TextStyle(
                     fontSize: 12.0
                   ),
@@ -74,7 +74,7 @@ class CardSwiper extends StatelessWidget {
 
     return GestureDetector(
       child: _card,
-      onTap: () => print('Detalle pelicula ${item.g01Name}...!'),
+      onTap: () => print('Detalle pelicula ${item.name}...!'),
     );
   }
 }

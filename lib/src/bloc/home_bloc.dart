@@ -1,14 +1,23 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:treecommerce/src/model/productos_model.dart';
+import 'package:treecommerce/src/services/home_service.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 
 class HomeBloc{
 
   final ProductosModel _productosModel = ProductosModel();
   final random = new Random();
   List<ProductosModel> _list = new List<ProductosModel>();
+
+  HomeService _homeService;
+
+  _init(){
+    if( _homeService == null){
+      _homeService = new HomeService();
+    }
+  }
 
   List<ProductosModel> getTestProducts(int count){
     if( _list.length > 0 ){
@@ -17,11 +26,12 @@ class HomeBloc{
 
     for(int i = 0; i < 3; i++ ){
       _list.add(new ProductosModel(
-        g01Id: i,
-        g01Name: "Producto " + (i + 1).toString(), 
-        g01Precio: "\$ ${ random.nextInt(999).toDouble() }",
-        g01Descripcion: "Esta es una descripcion...", 
-        g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
+        id: i,
+        name: "Producto " + (i + 1).toString(), 
+        price: random.nextInt(999).toDouble(),
+        unity: random.nextInt(999),
+        description: "Esta es una descripcion...", 
+        // g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
       ));
     }
 
@@ -34,17 +44,13 @@ class HomeBloc{
     return getTestProducts(3);
   }
 
-  ProductosModel getLastView(){
+  Future<ProductosModel> getLastView(UserPreferences _preferences) async{
 
-    int _id = random.nextInt(999);
-    
-    return new ProductosModel(
-        g01Id: _id,
-        g01Name: "Producto ${ _id }", 
-        g01Precio: "\$ ${ random.nextInt(999).toDouble() }",
-        g01Descripcion: "Esta es una descripcion...", 
-        g01Imagens: "https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png"
-    );
+    _init();
+    return _homeService.lastView(_preferences).then((value){
+      return value;
+    });
+
   }
 
   Future<List<ProductosModel>> inspiratedOnLastView() async{

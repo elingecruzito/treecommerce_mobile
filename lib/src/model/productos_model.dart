@@ -6,33 +6,37 @@ String productosModelToJson(ProductosModel data) => json.encode(data.toJson());
 
 class ProductosModel {
     ProductosModel({
-        this.g01Id,
-        this.g01Name,
-        this.g01Precio,
-        this.g01Descripcion,
-        this.g01Imagens,
+        this.id,
+        this.name,
+        this.price,
+        this.description,
+        this.unity,
+        this.category,
     });
 
-    int g01Id;
-    String g01Name;
-    String g01Precio;
-    String g01Descripcion;
-    String g01Imagens;
+    int id;
+    String name;
+    double price;
+    String description;
+    int unity;
+    String category;
 
     factory ProductosModel.fromJson(Map<String, dynamic> json) => ProductosModel(
-        g01Id: json["g01_id"],
-        g01Name: json["g01_name"],
-        g01Precio: json["g01_precio"],
-        g01Descripcion: json["g01_descripcion"],
-        g01Imagens: json["g01_imagens"],
+        id: json["id"],
+        name: json["name"],
+        price: double.parse(json["price"].toString()),
+        description: json["description"],
+        unity: json["unity"],
+        category: json["category"],
     );
 
     Map<String, dynamic> toJson() => {
-        "g01_id": g01Id,
-        "g01_name": g01Name,
-        "g01_precio": g01Precio,
-        "g01_descripcion": g01Descripcion,
-        "g01_imagens": g01Imagens,
+        "id": id,
+        "name": name,
+        "price": price,
+        "description": description,
+        "unity": unity,
+        "category": category,
     };
 }
 
