@@ -129,12 +129,7 @@ class _HomePageState extends State<HomePage> {
               ).toList()
             );
           }else{
-            return Container(
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator()
-              )
-            );
+            return getLoader();
           }
           
         }
@@ -144,37 +139,31 @@ class _HomePageState extends State<HomePage> {
   
   Widget _onSale(BuildContext context) {
 
-    return Container();
-
-    // return CardView(
-    //   titleCard: "Ofertas", 
-    //   contentCard: _getListProducts( _homeBloc.getOnSale() ),
-    //   footerCard: "Ver todas las ofertas",
-    //   routeFooterCard: 'list',
-    // );
+    return CardView(
+      titleCard: "Ofertas", 
+      contentCard: _getListProducts( _homeService.onSale(_preferences) ),
+      footerCard: "Ver todas las ofertas",
+      routeFooterCard: 'list',
+    );
   }
 
   Widget _inspirated() {
 
-    return Container();
-
-    // return CardView(
-    //   titleCard: "Inpirado en lo ultimo que viste", 
-    //   contentCard: _getListProducts( _homeBloc.inspiratedOnLastView() ),
-    //   footerCard: "Ver mas",
-    //   routeFooterCard: 'list',
-    // );
+    return CardView(
+      titleCard: "Inpirado en lo ultimo que viste", 
+      contentCard: _getListProducts( _homeService.inspirated(_preferences) ),
+      footerCard: "Ver mas",
+      routeFooterCard: 'list',
+    );
   }
 
   Widget _history() {
 
-    return Container();
-    
-    // return CardView(
-    //   titleCard: "Historial de navegacion", 
-    //   contentCard: _getListProducts( _homeBloc.historyViews() ),
-    //   footerCard: "Ver historial de navegacion",
-    //   routeFooterCard: 'list',
-    // );
+    return CardView(
+      titleCard: "Historial de navegacion", 
+      contentCard: _getListProducts( _homeService.history(_preferences) ),
+      footerCard: "Ver historial de navegacion",
+      routeFooterCard: 'list',
+    );
   }
 }

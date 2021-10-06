@@ -11,7 +11,7 @@ Future<RequestModel> petition(String path, Map<String, String> params) async {
   final client = RetryClient(http.Client());
   http.Response resp;
   try{
-    print(Directions().url_server + path);
+    print('POST: ' + Directions().url_server + path);
     resp = await client.post( Uri.http(Directions().url_server, path, params) );
   }catch(e){
     print(e.toString());
@@ -33,7 +33,7 @@ Future<RequestGetModel> petitionGet(String path) async{
   final client = RetryClient(http.Client());
   http.Response resp;
   try{
-    print(Directions().url_server + path);
+    print('GET: ' + Directions().url_server + path);
     resp = await client.get( Uri.http(Directions().url_server, path) );
   }catch(e){
     print(e.toString());

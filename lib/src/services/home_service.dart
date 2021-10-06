@@ -20,4 +20,28 @@ class HomeService{
     });
   }
 
+  Future<List<ProductosModel>> onSale(UserPreferences _preferences) async{
+    return await petition(Directions().path_offers, {
+      'token' : _preferences.token
+    }).then((value){
+      return productosListModelFromJson(value.body);
+    });
+  }
+
+  Future<List<ProductosModel>> inspirated(UserPreferences _preferences) async{
+    return await petition(Directions().path_inspirated, {
+      'token' : _preferences.token
+    }).then((value){
+      return productosListModelFromJson(value.body);
+    });
+  }
+
+  Future<List<ProductosModel>> history(UserPreferences _preferences) async{
+    return await petition(Directions().path_history, {
+      'token' : _preferences.token
+    }).then((value){
+      return productosListModelFromJson(value.body);
+    });
+  }
+
 }
