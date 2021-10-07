@@ -16,6 +16,8 @@ class ProductosModel {
         this.category,
         this.favorite,
         this.path,
+        this.porcentage,
+        this.total,
     });
 
     int id;
@@ -26,6 +28,8 @@ class ProductosModel {
     String category;
     int favorite;
     String path;
+    int porcentage;
+    double total;
 
     factory ProductosModel.fromJson(Map<String, dynamic> json) => ProductosModel(
         id: json["id"],
@@ -36,6 +40,10 @@ class ProductosModel {
         category: json["category"],
         favorite: json["favorite"],
         path: json["path"],
+        porcentage: json["percentage"],
+        total: json["percentage"] == 0 ? 
+                double.parse(json["price"].toString()) : 
+                (double.parse(json["price"].toString()) - ( double.parse(json["price"].toString()) * ( json["percentage"] / 100) ) ).roundToDouble(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -47,6 +55,8 @@ class ProductosModel {
         "category": category,
         "favorite": favorite,
         "path": path,
+        "percentage": porcentage,
+        "total": total,
     };
 }
 

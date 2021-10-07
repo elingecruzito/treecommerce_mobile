@@ -64,13 +64,8 @@ class CardProduct extends StatelessWidget {
                   fontSize: 15.0
                 ),
               ), 
-              Text( 
-                "\$ ${ producto.price }",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0
-                )
-              )
+              _price(),
+              
             ],
           )
         ]
@@ -78,5 +73,38 @@ class CardProduct extends StatelessWidget {
     );
 
   }
+
+  Widget _price() {
+    if(producto.porcentage > 0 ){
+      return Row(
+        children: [
+          Text( 
+            "\$ ${ producto.total }",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0
+            )
+          ),
+          Text(
+            " ${ producto.porcentage }% OFF",
+            style: TextStyle(
+              fontSize: 12.0,
+              color: Colors.lightGreen[700]
+            ),
+          )
+        ],
+      );
+    }else{
+      return Text( 
+        "\$ ${ producto.price }",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18.0
+        )
+      );
+    }
+  }
+
+  
 
 }
