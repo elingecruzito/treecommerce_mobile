@@ -12,6 +12,8 @@ class Directions{
   String path_history = '/treecommerce_backend/public/home/history';
 
   String path_watched_list = '/treecommerce_backend/public/watched/list';
+
+  String path_offers_list = '/treecommerce_backend/public/offers/list';
   
 
 }

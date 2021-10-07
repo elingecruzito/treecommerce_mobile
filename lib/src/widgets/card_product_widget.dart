@@ -30,28 +30,7 @@ class CardProduct extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.network(
-            producto.path, 
-            fit: BoxFit.cover, 
-            height: 120.0,
-            loadingBuilder: (context, child, loadingProgress){
-              if( loadingProgress == null){
-                return child;
-              }else{
-                return Image.asset(
-                  'assets/img/no-image.jpg',
-                  fit: BoxFit.cover, 
-                  height: 120.0,
-                );
-              }
-            },
-            errorBuilder: (context, error, stackTrace) =>
-              Image.asset(
-                  'assets/img/no-image.jpg',
-                  fit: BoxFit.cover, 
-                  height: 120.0,
-                )
-          ),
+          _renderImage(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,6 +48,39 @@ class CardProduct extends StatelessWidget {
       ),
     );
 
+  }
+
+  Widget _renderImage(){
+    if(producto.path == null){
+      return Image.asset(
+        'assets/img/no-image.jpg',
+        fit: BoxFit.cover, 
+        height: 120.0,
+      );
+    }else{
+      return Image.network(
+        producto.path, 
+        fit: BoxFit.cover, 
+        height: 120.0,
+        loadingBuilder: (context, child, loadingProgress){
+          if( loadingProgress == null){
+            return child;
+          }else{
+            return Image.asset(
+              'assets/img/no-image.jpg',
+              fit: BoxFit.cover, 
+              height: 120.0,
+            );
+          }
+        },
+        errorBuilder: (context, error, stackTrace) =>
+          Image.asset(
+              'assets/img/no-image.jpg',
+              fit: BoxFit.cover, 
+              height: 120.0,
+            )
+      );
+    }
   }
 
   Widget _price() {

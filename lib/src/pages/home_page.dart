@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Ofertas", 
       contentCard: _getListProducts( _homeService.onSale(_preferences) ),
       footerCard: "Ver todas las ofertas",
-      routeFooterCard: 'list',
+      routeFooterCard: 'offers',
     );
   }
 
