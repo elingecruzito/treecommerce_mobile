@@ -10,12 +10,9 @@ class CardProduct extends StatelessWidget {
   CardProduct({ @required this.producto });
 
   ProductosModel producto;
-  GaleryService _galeryService;
 
   @override
   Widget build(BuildContext context) {
-
-    _galeryService = new GaleryService();
 
     final _border = BorderSide(
       width: 0.5,

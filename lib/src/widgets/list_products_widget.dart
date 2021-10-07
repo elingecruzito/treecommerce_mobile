@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
+import 'package:treecommerce/src/widgets/card_product_widget.dart';
 
 class ListProductsWidget extends StatelessWidget {
   
@@ -36,13 +37,6 @@ class ListProductsWidget extends StatelessWidget {
  Widget _itemProduct(ProductosModel data) {
 
     return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: getBorder(),
-          top: getBorder()
-        )
-      ),
-      padding: EdgeInsets.all(5.0),
       child: Stack(
         children: [
           Positioned(
@@ -54,78 +48,9 @@ class ListProductsWidget extends StatelessWidget {
               size: 20.0,
             ), 
           ),
-          Row(
-            children: [
-              Image.network(
-                data.path, 
-                fit: BoxFit.cover, 
-                height: 120.0,
-                loadingBuilder: (context, child, loadingProgress){
-                  if( loadingProgress == null){
-                    return child;
-                  }else{
-                    return Image.asset(
-                      'assets/img/no-image.jpg',
-                      fit: BoxFit.cover, 
-                      height: 120.0,
-                    );
-                  }
-                },
-                errorBuilder: (context, error, stackTrace) =>
-                  Image.asset(
-                      'assets/img/no-image.jpg',
-                      fit: BoxFit.cover, 
-                      height: 120.0,
-                    )
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text( 
-                    data.name,
-                    style: TextStyle(
-                      fontSize: 15.0
-                    ),
-                  ), 
-                  _price(data),
-                ],
-              )
-            ],
-          ),
+          CardProduct(producto: data)
         ]
       ),
     );
-
-  }
-
-  Widget _price(ProductosModel producto) {
-    if(producto.porcentage > 0 ){
-      return Row(
-        children: [
-          Text( 
-            "\$ ${ producto.total }",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18.0
-            )
-          ),
-          Text(
-            " ${ producto.porcentage }% OFF",
-            style: TextStyle(
-              fontSize: 12.0,
-              color: Colors.lightGreen[700]
-            ),
-          )
-        ],
-      );
-    }else{
-      return Text( 
-        "\$ ${ producto.price }",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18.0
-        )
-      );
-    }
   }
 }
