@@ -15,6 +15,7 @@ class ProductosModel {
         this.unity,
         this.category,
         this.favorite,
+        this.path,
     });
 
     int id;
@@ -24,6 +25,7 @@ class ProductosModel {
     int unity;
     String category;
     int favorite;
+    String path;
 
     factory ProductosModel.fromJson(Map<String, dynamic> json) => ProductosModel(
         id: json["id"],
@@ -33,6 +35,7 @@ class ProductosModel {
         unity: json["unity"],
         category: json["category"],
         favorite: json["favorite"],
+        path: json["path"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -42,6 +45,8 @@ class ProductosModel {
         "description": description,
         "unity": unity,
         "category": category,
+        "favorite": favorite,
+        "path": path,
     };
 }
 

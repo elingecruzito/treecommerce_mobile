@@ -84,20 +84,27 @@ class _ListWatchedProductsPageState extends State<ListWatchedProductsPage> {
           ),
           Row(
             children: [
-              FutureBuilder(
-                future: _galeryService.getGalery(data.id == 0 ? 1 : data.id),
-                builder: (BuildContext context, AsyncSnapshot<List<GaleryModel>> snapshot){
-                  if( !snapshot.hasData ){
-                    return getLoader();
+              Image.network(
+                data.path, 
+                fit: BoxFit.cover, 
+                height: 120.0,
+                loadingBuilder: (context, child, loadingProgress){
+                  if( loadingProgress == null){
+                    return child;
                   }else{
-                    return FadeInImage(
-                      placeholder: AssetImage('assets/img/no-image.jpg'),
-                      image: NetworkImage(snapshot.data.first.path),
-                      fit: BoxFit.cover,
+                    return Image.asset(
+                      'assets/img/no-image.jpg',
+                      fit: BoxFit.cover, 
                       height: 120.0,
                     );
                   }
-                }
+                },
+                errorBuilder: (context, error, stackTrace) =>
+                  Image.asset(
+                      'assets/img/no-image.jpg',
+                      fit: BoxFit.cover, 
+                      height: 120.0,
+                    )
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

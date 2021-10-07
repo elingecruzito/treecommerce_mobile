@@ -33,13 +33,28 @@ class CardProduct extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // FadeInImage(
-          //   placeholder: AssetImage('assets/img/no-image.jpg'),
-          //   image: NetworkImage('https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png'),
-          //   fit: BoxFit.cover,
-          //   height: 120.0,
-          // ),
-          _galery(),
+          Image.network(
+            producto.path, 
+            fit: BoxFit.cover, 
+            height: 120.0,
+            loadingBuilder: (context, child, loadingProgress){
+              if( loadingProgress == null){
+                return child;
+              }else{
+                return Image.asset(
+                  'assets/img/no-image.jpg',
+                  fit: BoxFit.cover, 
+                  height: 120.0,
+                );
+              }
+            },
+            errorBuilder: (context, error, stackTrace) =>
+              Image.asset(
+                  'assets/img/no-image.jpg',
+                  fit: BoxFit.cover, 
+                  height: 120.0,
+                )
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,21 +79,4 @@ class CardProduct extends StatelessWidget {
 
   }
 
-  Widget _galery() {
-    return FutureBuilder(
-      future: _galeryService.getGalery(producto.id == 0 ? 1 : producto.id),
-      builder: (BuildContext context, AsyncSnapshot<List<GaleryModel>> snapshot){
-        if( !snapshot.hasData ){
-          return getLoader();
-        }else{
-          return FadeInImage(
-            placeholder: AssetImage('assets/img/no-image.jpg'),
-            image: NetworkImage(snapshot.data.first.path),
-            fit: BoxFit.cover,
-            height: 120.0,
-          );
-        }
-      }
-    );
-  }
 }
