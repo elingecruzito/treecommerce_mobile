@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Inpirado en lo ultimo que viste", 
       contentCard: _getListProducts( _homeService.inspirated(_preferences) ),
       footerCard: "Ver mas",
-      routeFooterCard: 'list',
+      routeFooterCard: 'inspirated',
     );
   }
 
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
       titleCard: "Historial de navegacion", 
       contentCard: _getListProducts( _homeService.history(_preferences) ),
       footerCard: "Ver historial de navegacion",
-      routeFooterCard: 'list',
+      routeFooterCard: 'watched',
     );
   }
 }

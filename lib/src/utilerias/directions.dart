@@ -14,6 +14,8 @@ class Directions{
   String path_watched_list = '/treecommerce_backend/public/watched/list';
 
   String path_offers_list = '/treecommerce_backend/public/offers/list';
+
+  String path_inspirated_list = '/treecommerce_backend/public/inspirated/list';
   
 
 }
