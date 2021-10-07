@@ -10,6 +10,8 @@ class Directions{
   String path_offers = '/treecommerce_backend/public/home/offers';
   String path_inspirated = '/treecommerce_backend/public/home/inspirated';
   String path_history = '/treecommerce_backend/public/home/history';
+
+  String path_watched_list = '/treecommerce_backend/public/watched/list';
   
 
 }

@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
             titleCard: "Visto recientemente", 
             footerCard: "Ver historia de navegacion", 
             contentCard: CardProduct(producto: snapshot.data),
-            routeFooterCard: 'list',
+            routeFooterCard: 'watched',
           );
         }
       }
