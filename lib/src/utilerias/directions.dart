@@ -1,21 +1,21 @@
 class Directions{
 
-  String path_galery = '/treecommerce_backend/public/galery';
+  String path_galery = '/galery';
 
-  String url_server = "192.168.1.76";
-  String path_authentificate = "/treecommerce_backend/public/login/authenticate";
+  String url_server = "192.168.1.74";
+  String path_authentificate = "/login/authenticate";
 
-  String path_carrucel = "/treecommerce_backend/public/home/carrucel";
-  String path_last_view = "/treecommerce_backend/public/home/lastView";
-  String path_offers = '/treecommerce_backend/public/home/offers';
-  String path_inspirated = '/treecommerce_backend/public/home/inspirated';
-  String path_history = '/treecommerce_backend/public/home/history';
+  String path_carrucel = "/home/carrucel";
+  String path_last_view = "/home/lastView";
+  String path_offers = '/home/offers';
+  String path_inspirated = '/home/inspirated';
+  String path_history = '/home/history';
 
-  String path_watched_list = '/treecommerce_backend/public/watched/list';
+  String path_watched_list = '/watched/list';
 
-  String path_offers_list = '/treecommerce_backend/public/offers/list';
+  String path_offers_list = '/offers/list';
 
-  String path_inspirated_list = '/treecommerce_backend/public/inspirated/list';
+  String path_inspirated_list = '/inspirated/list';
   
 
 }
