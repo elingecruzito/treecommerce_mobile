@@ -16,6 +16,8 @@ class Directions{
   String path_offers_list = '/offers/list';
 
   String path_inspirated_list = '/inspirated/list';
+
+  String path_search_list = '/search/search';
   
 
 }

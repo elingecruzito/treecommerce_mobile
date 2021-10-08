@@ -1,7 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/bloc/search_bloc.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
+import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/services/search_service.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
+import 'package:treecommerce/src/widgets/list_products_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({ Key key }) : super(key: key);
@@ -12,19 +18,16 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
 
-  int _numItems = 0;
-  final Random _random = new Random();
-
-  Size _size;
-  final _pageController = new PageController(
-    initialPage: 0,
-    viewportFraction: 0.5,
-  );
+  String text = "";
+  SearchService _service;
+  UserPreferences _preferences;
 
   @override
   Widget build(BuildContext context) {
 
-    _size = MediaQuery.of(context).size;
+    final _searchingBloc = Provider.searchBloc(context);
+    _preferences = Provider.userPreferences(context);
+    _service = new SearchService();
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
           borderRadius: BorderRadius.circular(10.0)
         ),
         backgroundColor: Colors.white,
-        title: _appBarSearch(),
+        title: _appBarSearch(_searchingBloc),
       ),
       body:  SafeArea(
         child: _listSearch()
@@ -44,11 +47,11 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _appBarSearch() {
+  Widget _appBarSearch(SearchBloc _searchingBloc) {
 
     return Container(
       child: StreamBuilder(
-        stream: null,
+        stream: _searchingBloc.searchingStream,
         builder: (BuildContext context, AsyncSnapshot snapshot){
           return Container(
             width: double.infinity,
@@ -57,7 +60,11 @@ class _SearchPageState extends State<SearchPage> {
                 border: InputBorder.none,
                 hintText: 'Buscar en TreeCommerce ',
               ),
-              onChanged: null,
+              onChanged: (text){
+                setState(() {
+                  this.text = text;                  
+                });
+              },
             ),
           );
         },
@@ -67,37 +74,9 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _listSearch() {
 
-    final items = List<String>.generate(10, (i) => "Item ${ i + 1}");
-
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(5),
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'list'),
-            child: Container(
-              padding: EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(width: 10.0,),
-                  Text(
-                    items[index],
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        }
-      ),
-    );
+    if( this.text == "" ){
+      return Container();
+    }
+    return ListProductsWidget(future: _service.getListProducts(_preferences, this.text));
   }
 }

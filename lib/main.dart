@@ -5,7 +5,6 @@ import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/inspirated_page.dart';
 import 'package:treecommerce/src/pages/launcher_page.dart';
-import 'package:treecommerce/src/pages/list_products_page.dart';
 import 'package:treecommerce/src/pages/offers_page.dart';
 import 'package:treecommerce/src/pages/watched_products_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
           'home' : (BuildContext context) => HomePage(),
           'search' : (BuildContext context) => SearchPage(),
           'error' : (BuildContext context) => ErrorPage(),
-          'list' : (BuildContext context) => ListProductsPage(),
           'notifications' : (BuildContext context) => NotificationsPage(),
           'buys' : (BuildContext context) => BuysPage(),
           'account' : (BuildContext context) => AccountPage(),
