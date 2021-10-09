@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-List<GaleryModel> galeryModelFromJson(String str) => List<GaleryModel>.from(json.decode(str).map((x) => GaleryModel.fromJson(x)));
+List<GaleryModel> galeryListModelFromJson(String str) => List<GaleryModel>.from(json.decode(str).map((x) => GaleryModel.fromJson(x)));
+
+GaleryModel galeryModelFromJson(String str) => GaleryModel.fromJson(json.decode(str));
 
 String galeryModelToJson(List<GaleryModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

@@ -1,6 +1,7 @@
 class Directions{
 
   String path_galery = '/galery';
+  String path_cover = '/galery/cover';
 
   String url_server = "192.168.1.74";
   String path_authentificate = "/login/authenticate";
@@ -18,6 +19,8 @@ class Directions{
   String path_inspirated_list = '/inspirated/list';
 
   String path_search_list = '/search/search';
+
+  String path_pruduct = '/products/product';
   
 
 }

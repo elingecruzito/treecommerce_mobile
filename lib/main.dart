@@ -6,6 +6,7 @@ import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/inspirated_page.dart';
 import 'package:treecommerce/src/pages/launcher_page.dart';
 import 'package:treecommerce/src/pages/offers_page.dart';
+import 'package:treecommerce/src/pages/product_page.dart';
 import 'package:treecommerce/src/pages/watched_products_page.dart';
 import 'package:treecommerce/src/pages/login_page.dart';
 import 'package:treecommerce/src/pages/notifications_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           'watched' : (BuildContext context) => WatchedProductsPage(),
           'offers' : (BuildContext context) => OffersPage(),
           'inspirated' : (BuildContext context) => InspiratedPage(),
+          'product' : (BuildContext context) => ProductPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

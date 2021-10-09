@@ -10,9 +10,12 @@ class CardProduct extends StatelessWidget {
   CardProduct({ @required this.producto });
 
   ProductosModel producto;
+  GaleryService _galeryService;
 
   @override
   Widget build(BuildContext context) {
+
+    _galeryService = new GaleryService();
 
     final _border = BorderSide(
       width: 0.5,
@@ -20,67 +23,75 @@ class CardProduct extends StatelessWidget {
       style: BorderStyle.solid
     );
 
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border(
-          top: _border,
-          bottom: _border
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, 'product', arguments: producto),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border(
+            top: _border,
+            bottom: _border
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          _renderImage(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text( 
-                this.producto.name,
-                style: TextStyle(
-                  fontSize: 15.0
-                ),
-              ), 
-              _price(),
-              
-            ],
-          )
-        ]
+        child: Row(
+          children: [
+            _renderImage(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text( 
+                  this.producto.name,
+                  style: TextStyle(
+                    fontSize: 15.0
+                  ),
+                ), 
+                _price(),
+                
+              ],
+            )
+          ]
+        ),
       ),
     );
 
   }
 
   Widget _renderImage(){
-    if(producto.path == null){
-      return Image.asset(
-        'assets/img/no-image.jpg',
-        fit: BoxFit.cover, 
-        height: 120.0,
-      );
-    }else{
-      return Image.network(
-        producto.path, 
-        fit: BoxFit.cover, 
-        height: 120.0,
-        loadingBuilder: (context, child, loadingProgress){
-          if( loadingProgress == null){
-            return child;
-          }else{
-            return Image.asset(
-              'assets/img/no-image.jpg',
-              fit: BoxFit.cover, 
-              height: 120.0,
-            );
-          }
-        },
-        errorBuilder: (context, error, stackTrace) =>
-          Image.asset(
-              'assets/img/no-image.jpg',
-              fit: BoxFit.cover, 
-              height: 120.0,
-            )
-      );
-    }
+
+    return FutureBuilder(
+      future: _galeryService.getCover(producto.id),
+      builder: (BuildContext context, AsyncSnapshot<GaleryModel> snapshot){
+        if( snapshot.hasData ){
+          return Image.network(
+            snapshot.data.path, 
+            fit: BoxFit.cover, 
+            height: 120.0,
+            loadingBuilder: (context, child, loadingProgress){
+              if( loadingProgress == null){
+                return child;
+              }else{
+                return Image.asset(
+                  'assets/img/no-image.jpg',
+                  fit: BoxFit.cover, 
+                  height: 120.0,
+                );
+              }
+            },
+            errorBuilder: (context, error, stackTrace) =>
+              Image.asset(
+                  'assets/img/no-image.jpg',
+                  fit: BoxFit.cover, 
+                  height: 120.0,
+                )
+          );
+        }
+        return Image.asset(
+          'assets/img/no-image.jpg',
+          fit: BoxFit.cover, 
+          height: 120.0,
+        );
+      }
+    );
   }
 
   Widget _price() {

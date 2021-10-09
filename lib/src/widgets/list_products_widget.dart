@@ -43,7 +43,7 @@ class ListProductsWidget extends StatelessWidget {
             right: 10.0,
             top: 5.0,
             child: Icon(
-              data.favorite != 1 ? Icons.favorite_border_outlined : Icons.favorite, 
+              !data.favorite ? Icons.favorite_border_outlined : Icons.favorite, 
               color: Colors.blue,
               size: 20.0,
             ), 

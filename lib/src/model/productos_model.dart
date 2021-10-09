@@ -14,8 +14,13 @@ class ProductosModel {
         this.description,
         this.unity,
         this.category,
+
+        this.id_category,
+        this.provider,
+        this.valorarion,
+        this.count_valoration,
+
         this.favorite,
-        this.path,
         this.porcentage,
         this.total,
     });
@@ -26,8 +31,13 @@ class ProductosModel {
     String description;
     int unity;
     String category;
-    int favorite;
-    String path;
+
+    int id_category;
+    String provider;
+    double valorarion;
+    int count_valoration;
+
+    bool favorite;
     int porcentage;
     double total;
 
@@ -38,8 +48,13 @@ class ProductosModel {
         description: json["description"],
         unity: json["unity"],
         category: json["category"],
-        favorite: json["favorite"],
-        path: json["path"],
+
+        id_category: json["id_category"],
+        provider: json["provider"],
+        valorarion: double.parse(json["valoration"]),
+        count_valoration: json["count_valoration"],
+
+        favorite: json["favorite"] == 1 ? true : false,
         porcentage: json["percentage"],
         total: json["percentage"] == 0 ? 
                 double.parse(json["price"].toString()) : 
@@ -53,8 +68,13 @@ class ProductosModel {
         "description": description,
         "unity": unity,
         "category": category,
+
+        "id_category" : id_category,
+        "provider" : provider,
+        "valoration" : valorarion,
+        "count_valoration" : count_valoration,
+
         "favorite": favorite,
-        "path": path,
         "percentage": porcentage,
         "total": total,
     };
