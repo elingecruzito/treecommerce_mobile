@@ -114,34 +114,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
   
-  Widget _getListProducts(Future<List<ProductosModel>> result){
-    return Container(
-      width: double.infinity,
-      child: FutureBuilder(
-        future: result,
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-          if(snapshot.hasData){
-            return Column(
-              children: snapshot.data.map(
-                (item) => CardProduct(
-                  producto: item
-                )
-              ).toList()
-            );
-          }else{
-            return getLoader();
-          }
-          
-        }
-      ),
-    );
-  }
-  
   Widget _onSale(BuildContext context) {
 
     return CardView(
       titleCard: "Ofertas", 
-      contentCard: _getListProducts( _homeService.onSale(_preferences) ),
+      contentCard: getListProducts( _homeService.onSale(_preferences) ),
       footerCard: "Ver todas las ofertas",
       routeFooterCard: 'offers',
     );
@@ -151,7 +128,7 @@ class _HomePageState extends State<HomePage> {
 
     return CardView(
       titleCard: "Inpirado en lo ultimo que viste", 
-      contentCard: _getListProducts( _homeService.inspirated(_preferences) ),
+      contentCard: getListProducts( _homeService.inspirated(_preferences) ),
       footerCard: "Ver mas",
       routeFooterCard: 'inspirated',
     );
@@ -161,7 +138,7 @@ class _HomePageState extends State<HomePage> {
 
     return CardView(
       titleCard: "Historial de navegacion", 
-      contentCard: _getListProducts( _homeService.history(_preferences) ),
+      contentCard: getListProducts( _homeService.history(_preferences) ),
       footerCard: "Ver historial de navegacion",
       routeFooterCard: 'watched',
     );

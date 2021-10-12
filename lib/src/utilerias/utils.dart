@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
+import 'package:treecommerce/src/widgets/card_product_widget.dart';
 
 final _decorationGradient = BoxDecoration(
   gradient: LinearGradient(
@@ -117,3 +119,26 @@ Widget getLoader(){
     )
   );
 }
+
+Widget getListProducts(Future<List<ProductosModel>> result){
+    return Container(
+      width: double.infinity,
+      child: FutureBuilder(
+        future: result,
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if(snapshot.hasData){
+            return Column(
+              children: snapshot.data.map(
+                (item) => CardProduct(
+                  producto: item
+                )
+              ).toList()
+            );
+          }else{
+            return getLoader();
+          }
+          
+        }
+      ),
+    );
+  }

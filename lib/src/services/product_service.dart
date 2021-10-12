@@ -13,4 +13,14 @@ class ProductService{
       return productosModelFromJson(value.body);
     });
   }
+
+  Future<List<ProductosModel>> getProductByProvider(UserPreferences _preferences, int id) async{
+    return await petition(
+      Directions().path_pruduct_by_provider,{
+      'token' : _preferences.token,
+      'id' : id.toString()
+    }).then((value) {
+      return productosListModelFromJson(value.body);
+    });
+  }
 }

@@ -21,6 +21,13 @@ class Directions{
   String path_search_list = '/search/search';
 
   String path_pruduct = '/products/product';
+  String path_pruduct_by_provider = '/products/provider';
+
+  String path_privider_product = '/providers/product';
+
+  String path_valoration_all = '/valorations/all';
+  String path_valoration_positives = '/valorations/positives';
+  String path_valoration_negatives = '/valorations/negatives';
   
 
 }
