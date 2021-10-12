@@ -22,7 +22,7 @@ class _OffersPageState extends State<OffersPage> {
   @override
   Widget build(BuildContext context) {
 
-    _service = new OffersService();
+    _service = Provider.offersService(context);
     _userPreferences = Provider.userPreferences(context);
 
     return Scaffold(

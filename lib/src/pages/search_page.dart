@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
 
     final _searchingBloc = Provider.searchBloc(context);
     _preferences = Provider.userPreferences(context);
-    _service = new SearchService();
+    _service = Provider.searchService(context);
 
     return Scaffold(
       appBar: AppBar(

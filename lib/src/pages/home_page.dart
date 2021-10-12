@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     _homeBloc = Provider.homeBloc(context);
-    _homeService = new HomeService();
+    _homeService =  Provider.homeService(context);
     _preferences = Provider.userPreferences(context);
 
     return Scaffold(

@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     _preferences = Provider.userPreferences(context);
 
     final _loginBloc = Provider.loginBloc(context);
-    _loginService = new LoginService();
+    _loginService = Provider.loginService(context);
 
     _messages = Provider.messages(context);
 

@@ -22,7 +22,7 @@ class _InspiratedPageState extends State<InspiratedPage> {
   @override
   Widget build(BuildContext context) {
 
-    _service = new InspiratedService();
+    _service = Provider.inspiratedService(context);
     _userPreferences = Provider.userPreferences(context);
 
     return Scaffold(

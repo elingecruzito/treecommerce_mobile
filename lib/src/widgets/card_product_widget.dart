@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:treecommerce/src/model/galery_model.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
-import 'package:treecommerce/src/utilerias/utils.dart';
 import 'package:treecommerce/src/services/galery_service.dart';
+import 'package:treecommerce/src/provider/provider.dart';
 
 class CardProduct extends StatelessWidget {
   
@@ -15,7 +14,7 @@ class CardProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    _galeryService = new GaleryService();
+    _galeryService = Provider.galeryService(context);
 
     final _border = BorderSide(
       width: 0.5,

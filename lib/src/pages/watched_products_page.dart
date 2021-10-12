@@ -22,7 +22,7 @@ class _WatchedProductsPageState extends State<WatchedProductsPage> {
   @override
   Widget build(BuildContext context) {
     
-    _service = new WatchedService();
+    _service = Provider.watchedService(context);
     _userPreferences = Provider.userPreferences(context);
 
     return Scaffold(

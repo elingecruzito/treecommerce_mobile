@@ -36,10 +36,10 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
 
     _producto = ModalRoute.of(context).settings.arguments;
-    _serviceGalery = new GaleryService();
-    _service = new ProductService();
-    _providersService = new ProvidersService();
-    _valorationsService = new ValorationsService();
+    _serviceGalery = Provider.galeryService(context);
+    _service = Provider.productService(context);
+    _providersService = Provider.providersService(context);
+    _valorationsService = Provider.valorationsService(context);
     _preferences = Provider.userPreferences(context);
 
     return Scaffold(
