@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:treecommerce/src/model/galery_model.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
-import 'package:treecommerce/src/model/providers_model.dart';
-import 'package:treecommerce/src/model/valorations_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
-import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/services/product_service.dart';
-import 'package:treecommerce/src/services/providers_service.dart';
-import 'package:treecommerce/src/services/valorations_service.dart';
 import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 import 'package:treecommerce/src/widgets/drawer_widget.dart';
+import 'package:treecommerce/src/widgets/galery_carrucel_widget.dart';
+import 'package:treecommerce/src/widgets/provider_info_widget.dart';
+import 'package:treecommerce/src/widgets/tab_bar_valorations_widget.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key key}) : super(key: key);
@@ -22,11 +18,8 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
 
-  GaleryService _serviceGalery;
   UserPreferences _preferences;
   ProductService _service;
-  ProvidersService _providersService;
-  ValorationsService _valorationsService;
 
   ProductosModel _producto;
   final _sizeIcons = 25.0;
@@ -36,10 +29,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
 
     _producto = ModalRoute.of(context).settings.arguments;
-    _serviceGalery = Provider.galeryService(context);
     _service = Provider.productService(context);
-    _providersService = Provider.providersService(context);
-    _valorationsService = Provider.valorationsService(context);
     _preferences = Provider.userPreferences(context);
 
     return Scaffold(
@@ -100,9 +90,8 @@ class _ProductPageState extends State<ProductPage> {
           SizedBox(height: 5.0),
           _valoration(),
           SizedBox(height: 5.0),
-          _galery(),
+          GaleryCarrucelWidget(productId: _producto.id),
           _price(),
-          Text('IVA incluido'),
           SizedBox(height: 15.0),
           _stock(),
           SizedBox(height: 5.0),
@@ -110,7 +99,7 @@ class _ProductPageState extends State<ProductPage> {
           SizedBox(height: 5.0),
           _moreProducts(),
           SizedBox(height: 5.0),
-          _providerInformation(),
+          ProviderInfoWidget(idProduct: _producto.id),
           SizedBox(height: 15.0),
           _description(),
           SizedBox(height: 15.0),
@@ -150,47 +139,7 @@ class _ProductPageState extends State<ProductPage> {
       children: _valorationStarts,
     );
   }
-
-  Widget _galery() {
-    return FutureBuilder(
-      future: _serviceGalery.getGalery(_producto.id),
-      builder: (BuildContext context, AsyncSnapshot<List<GaleryModel>> snapshot){
-        if( !snapshot.hasData ){
-          return getLoader();
-        }else{
-          List<Image> itemList = snapshot.data.map((item) => 
-            Image.network(item.path, fit: BoxFit.scaleDown)
-          ).toList();
-          
-          return Container(
-            width: double.infinity,
-            height: 250.0,
-            padding: EdgeInsets.all(5.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Swiper(
-                loop: true,
-                viewportFraction: 1.0,
-                itemBuilder: (BuildContext context, int index){
-                  return itemList[index];
-                },
-                itemCount: itemList.length,
-                pagination: new SwiperPagination(
-                  builder: new FractionPaginationBuilder(
-                    activeColor: Colors.black,
-                    color: Colors.grey,
-                    fontSize: 10.0, 
-                    activeFontSize: 10.0
-                  )
-                ),
-              ),
-            )
-          );
-        }
-      }
-    );
-  }
-
+  
   Widget _price() {
 
     return Column(
@@ -205,8 +154,7 @@ class _ProductPageState extends State<ProductPage> {
             fontSize: 14.0,
             decoration: TextDecoration.lineThrough,
           ),
-        ) :
-        Text(''),
+        ) : Text(''),
         //Precio total
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,10 +172,10 @@ class _ProductPageState extends State<ProductPage> {
               style: TextStyle(
                 color: Colors.lightGreen[700]
               ),
-            ) :
-            Text('')
+            ) : Text('')
           ],
-        )
+        ),
+        Text('IVA incluido'),
       ],
     );
   }
@@ -316,29 +264,6 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget _description() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 5.0),
-        Text(
-          'Descripcion:', 
-          style: TextStyle(
-            fontSize: 18.0,
-            // fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(height: 5.0),
-        Text(
-          _producto.description,
-          style: TextStyle(
-            fontSize: 15.0
-          ),
-        )
-      ],
-    );
-  }
-
   Widget _moreProducts() {
 
     return Column(
@@ -353,132 +278,62 @@ class _ProductPageState extends State<ProductPage> {
         ),
         SizedBox(height: 10.0),
         getListProducts( _service.getProductByProvider(_preferences, _producto.id) ),
-        InkWell(
-          onTap: () => print('Ver mas productos del proveedor'),
-          child: Container(
-            padding: EdgeInsets.all(13.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 1.0,
-                color: Colors.grey[350],
-                style: BorderStyle.solid
+        _watchMore('Ver mas productos del vendedor', ()=> print('Ver mas productos del vendedor'))
+      ],
+    );
+  }
+
+  Widget _watchMore(String _text, Function _function){
+    return InkWell(
+      onTap: () => _function,
+      child: Container(
+        padding: EdgeInsets.all(13.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1.0,
+            color: Colors.grey[350],
+            style: BorderStyle.solid
+          ),
+          borderRadius: BorderRadius.circular(5.0)
+        ),
+        child: Stack(
+          children: [
+            Text(
+              _text,
+              style: TextStyle(
+                color: Colors.teal[300]
               ),
-              borderRadius: BorderRadius.circular(5.0)
             ),
-            child: Stack(
-              children: [
-                Text(
-                  'Ver mas publicaciones del vendedor',
-                  style: TextStyle(
-                    color: Colors.teal[300]
-                  ),
-                ),
-                Positioned(
-                  child: Icon(Icons.keyboard_arrow_right_rounded, color: Colors.teal[300]), 
-                  right: 0.0
-                )
-              ],
-            ),
+            Positioned(
+              child: Icon(Icons.keyboard_arrow_right_rounded, color: Colors.teal[300]), 
+              right: 0.0
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _description() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 5.0),
+        Text(
+          'Descripcion:', 
+          style: TextStyle(
+            fontSize: 18.0,
+          ),
+        ),
+        SizedBox(height: 5.0),
+        Text(
+          _producto.description,
+          style: TextStyle(
+            fontSize: 15.0
           ),
         )
       ],
-    );
-  
-  }
-
-  Widget _providerInformation() {
-
-    return FutureBuilder(
-      future: _providersService.getProduct(_preferences, _producto.id),
-      builder: (BuildContext context, AsyncSnapshot<ProvidersModel> snapshot) {
-        if( snapshot.hasData ){
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10.0),
-              Text(
-                'Informacion del vendedor',
-                style: TextStyle(
-                  fontSize: 18.0
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Row(
-                children: [
-                  Icon(Icons.location_on_outlined, color: Colors.grey, size: _sizeIcons),
-                  Column(
-                    children: [
-                      Text(
-                        'Ubicacion',
-                        style: TextStyle(
-                          color: Colors.black, 
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric( horizontal: _sizeIcons),
-                child: Text(
-                  snapshot.data.address,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              _valorationLight(snapshot.data)
-            ],
-          );
-        }
-        return getLoader();
-      },
-    );
-  }
-
-  Widget _valorationLight(ProvidersModel _provider){
-
-    final _sizePage = MediaQuery.of(context).size;
-    final _sizeWithSizeBox = 5.0;
-    final _withLight = ( _sizePage.width / 5) - ( _sizeWithSizeBox * 4 );
-
-    final _heightActive = 10.0;
-    final _heightInactive = 5.0;
-
-    return Row(
-      children: [
-        Container(
-          width: _withLight,
-          height: _provider.valoration.round() == 1 ? _heightActive : _heightInactive,
-          color: _provider.valoration.round() == 1 ? Colors.red : Colors.red[100],
-        ),
-        SizedBox(width: _sizeWithSizeBox),
-        Container(
-          width: _withLight,
-          height: _provider.valoration.round() == 2 ? _heightActive : _heightInactive,
-          color: _provider.valoration.round() == 2 ? Colors.orange : Colors.orange[100],
-        ),
-        SizedBox(width: _sizeWithSizeBox),
-        Container(
-          width: _withLight,
-          height: _provider.valoration.round() == 3 ? _heightActive : _heightInactive,
-          color: _provider.valoration.round() == 3 ? Colors.yellow : Colors.yellow[100],
-        ),
-        SizedBox(width: _sizeWithSizeBox),
-        Container(
-          width: _withLight,
-          height: _provider.valoration.round() == 4 ? _heightActive : _heightInactive,
-          color: _provider.valoration.round() == 4 ? Colors.lightGreen : Colors.lightGreen[100],
-        ),
-        SizedBox(width: _sizeWithSizeBox),
-        Container(
-          width: _withLight,
-          height: _provider.valoration.round() == 5 ? _heightActive : _heightInactive,
-          color: _provider.valoration.round() == 5 ? Colors.green : Colors.green[100],
-        ),
-      ]
     );
   }
 
@@ -519,130 +374,9 @@ class _ProductPageState extends State<ProductPage> {
         Row(
           children: _valorationStarts
         ),
-        _tabBarValorations(),
-        InkWell(
-          onTap: () => print('Ver mas opiniones'),
-          child: Container(
-            padding: EdgeInsets.all(13.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 1.0,
-                color: Colors.grey[350],
-                style: BorderStyle.solid
-              ),
-              borderRadius: BorderRadius.circular(5.0)
-            ),
-            child: Stack(
-              children: [
-                Text(
-                  'Ver mas opiniones',
-                  style: TextStyle(
-                    color: Colors.teal[300]
-                  ),
-                ),
-                Positioned(
-                  child: Icon(Icons.keyboard_arrow_right_rounded, color: Colors.teal[300]), 
-                  right: 0.0
-                )
-              ],
-            ),
-          ),
-        )
+        TabBarValorationsWidget(idProduct: _producto.id),
+        _watchMore('Ver mas opciones', () => print('Ver mas opciones'))
       ],
     );
   }
-
-  Widget _tabBarValorations() {
-
-    return DefaultTabController(
-      length: 3, 
-      initialIndex: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            child: TabBar(
-              tabs: [
-                Tab(text: 'Todas'),
-                Tab(text: 'Positivas'),
-                Tab(text: 'Negativas'),
-              ]
-            ),
-          ),
-          Container(
-            height: 300.0,
-            child: TabBarView(
-              children: [
-                Container(
-                  child: FutureBuilder(
-                    future: _valorationsService.getAllValorations(_preferences, _producto.id),
-                    builder: (BuildContext context, AsyncSnapshot<List<ValorationsModel>> snapshot) {
-                      return _renderValorations(snapshot);
-                    },
-                  ),
-                ),
-                Container(
-                  child: FutureBuilder(
-                    future: _valorationsService.getPositivesValorations(_preferences, _producto.id),
-                    builder: (BuildContext context, AsyncSnapshot<List<ValorationsModel>> snapshot) {
-                      return _renderValorations(snapshot);
-                    },
-                  ),
-                ),
-                Container(
-                  child: FutureBuilder(
-                    future: _valorationsService.getNegativesValorations(_preferences, _producto.id),
-                    builder: (BuildContext context, AsyncSnapshot<List<ValorationsModel>> snapshot) {
-                      return _renderValorations(snapshot);
-                    },
-                  ),
-                ),
-              ]
-            ),
-          )
-        ],
-      )
-    );
-  } 
-
-  Widget _renderValorations(AsyncSnapshot<List<ValorationsModel>> snapshot){
-    if( snapshot.hasData ){
-
-      return ListView.builder(
-        itemCount: snapshot.data.length,
-        itemBuilder: (context, index) {
-          
-          List<Widget> _starts = List<Widget>();
-          for (var i = 0; i < 5; i++) {
-            if( snapshot.data[index].starts > i ){
-              _starts.add(Icon(Icons.star_outlined, color: Colors.blue, size: 15.0));
-            }else{
-              _starts.add(Icon(Icons.star_outlined, color: Colors.grey, size: 15.0));
-            }
-          }
-          return Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Row(
-                  children: _starts,
-                ),
-                Text(
-                  snapshot.data[index].comment,
-                  style: TextStyle(
-
-                  ),
-                )
-              ],
-            ),
-          );
-        }
-      );
-    }else{
-      return getLoader();
-    }
-    
-  }
-
 }
