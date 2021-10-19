@@ -44,6 +44,14 @@ class UserPreferences{
     return _prefs.getKeys().isEmpty;
   }
 
+  setCount(int _count){
+    _prefs.setInt("count", _count);
+  }
+
+  get count{
+    return _prefs.getInt("count");
+  }
+
   destroy(){
     _prefs.clear();
   }

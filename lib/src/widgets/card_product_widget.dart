@@ -23,7 +23,10 @@ class CardProduct extends StatelessWidget {
     );
 
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, 'product', arguments: producto),
+      onTap: () {
+        Provider.userPreferences(context).setCount(1);
+        Navigator.pushNamed(context, 'product', arguments: producto);
+      },
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(

@@ -18,4 +18,8 @@ class Messages{
   final String TITLE_ALERT_LOGOUT = "Logout";
   final String MESSAGE_ALERT_LOGOUT = "Quieres salir de tu cuenta?";
 
+//----------------------------------------------------------------------------------------------
+
+  final String MESSAGE_ALERT_COUNT = 'Cantidad incorrecta!';
+
 }

@@ -7,6 +7,7 @@ import 'package:treecommerce/src/utilerias/utils.dart';
 import 'package:treecommerce/src/widgets/drawer_widget.dart';
 import 'package:treecommerce/src/widgets/galery_carrucel_widget.dart';
 import 'package:treecommerce/src/widgets/provider_info_widget.dart';
+import 'package:treecommerce/src/widgets/stock_widget.dart';
 import 'package:treecommerce/src/widgets/tab_bar_valorations_widget.dart';
 
 class ProductPage extends StatefulWidget {
@@ -23,7 +24,11 @@ class _ProductPageState extends State<ProductPage> {
 
   ProductosModel _producto;
   final _sizeIcons = 25.0;
-  int _cantidad = 1;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,16 @@ class _ProductPageState extends State<ProductPage> {
     _service = Provider.productService(context);
     _preferences = Provider.userPreferences(context);
 
+    FutureBuilder(
+      future: Provider.watchedService(context).addLastView(_preferences, _producto.id),
+      builder: (BuildContext context, AsyncSnapshot<ProductosModel> snapshot) {
+        if( snapshot.hasData ){
+          print(snapshot.data);
+        }
+        return ;
+      },
+    );
+    
     return Scaffold(
       drawer: DrawerCustom(),
       appBar: AppBar(
@@ -93,7 +108,7 @@ class _ProductPageState extends State<ProductPage> {
           GaleryCarrucelWidget(productId: _producto.id),
           _price(),
           SizedBox(height: 15.0),
-          _stock(),
+          StockWidget(productosModel: _producto),
           SizedBox(height: 5.0),
           _buttonsShop(),
           SizedBox(height: 5.0),
@@ -177,58 +192,6 @@ class _ProductPageState extends State<ProductPage> {
         ),
         Text('IVA incluido'),
       ],
-    );
-  }
-
-  Widget _stock() {
-
-    if( _producto.unity == 1 ){
-      return Container(
-        child: Text(
-          'Ultimo disponible!',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.0
-          ),
-        ),
-      );
-    }
-
-    return InkWell(
-      onTap: () => print('Agregar mas cantidad!'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Stock disponible',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 5.0),
-          Container(
-            padding: EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(5.0)
-            ),
-            child: Stack(
-              children: [
-                Row(
-                  children: [
-                    Text('Cantidad: ', style: TextStyle(fontSize: 15.0)),
-                    Text('${ _cantidad }', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
-                    SizedBox(width: 10.0),
-                    Text('(${_producto.unity} disponibles)', style: TextStyle(color: Colors.grey, fontSize: 12.0)),
-                  ],
-                ),
-                Positioned(
-                  child: Icon(Icons.keyboard_arrow_right_rounded, color: Colors.grey,), 
-                  right: 0.0
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

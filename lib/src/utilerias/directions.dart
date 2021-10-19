@@ -13,6 +13,7 @@ class Directions{
   String path_history = '/home/history';
 
   String path_watched_list = '/watched/list';
+  String path_watched_add = '/watched/add';
 
   String path_offers_list = '/offers/list';
 

@@ -3,6 +3,7 @@ import 'package:treecommerce/src/bloc/buys_bloc.dart';
 import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
+import 'package:treecommerce/src/bloc/product_bloc.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
 import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/services/home_service.dart';
@@ -26,6 +27,7 @@ class Provider extends InheritedWidget {
   final _buysBloc = new BuysBloc();
   final _userPreferences = new UserPreferences();
   final _messages = new Messages();
+  final _productBloc = new ProductBloc();
 
   final _galeryService = new GaleryService();
   final _homeService = new HomeService();
@@ -72,6 +74,9 @@ class Provider extends InheritedWidget {
 
   static UserPreferences userPreferences(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._userPreferences;
+
+  static ProductBloc productBloc(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._productBloc;
 
 //-------------------------------------------------------------------------------------------------------
 

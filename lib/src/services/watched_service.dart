@@ -16,4 +16,16 @@ class WatchedService{
     });
     
   }
+
+  Future<ProductosModel> addLastView(UserPreferences _preferences, int _product)async {
+
+    return await petition(
+      Directions().path_watched_add,{
+      'token' : _preferences.token,
+      'id' : _product.toString()
+    }).then((value) {
+      return productosModelFromJson(value.body);
+    });
+    
+  }
 }
