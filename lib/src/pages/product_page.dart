@@ -78,7 +78,15 @@ class _ProductPageState extends State<ProductPage> {
       ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: _view_product(),
+          child: FutureBuilder(
+            future: Provider.watchedService(context).addLastView(_preferences, _producto.id),
+            builder: (BuildContext context, AsyncSnapshot<ProductosModel> snapshot) {
+              if( snapshot.hasData ){
+                return _view_product();
+              }
+              return getLoader();
+            },
+          ),
         )
       )
     );
