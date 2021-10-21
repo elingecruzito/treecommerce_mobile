@@ -5,6 +5,7 @@ import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/bloc/product_bloc.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
+import 'package:treecommerce/src/services/directions_service.dart';
 import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/services/home_service.dart';
 import 'package:treecommerce/src/services/inspirated_service.dart';
@@ -39,6 +40,7 @@ class Provider extends InheritedWidget {
   final _searchService = new SearchService();
   final _valorationsService = new ValorationsService();
   final _watchedService = new WatchedService();
+  final _directionsService = new DirectionsService();
 
   static Provider _instancia;
   factory Provider({Key key, Widget child}){
@@ -109,6 +111,9 @@ class Provider extends InheritedWidget {
   
   static WatchedService watchedService(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._watchedService;
+
+  static DirectionsService directionsService(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._directionsService;
 
 
 }

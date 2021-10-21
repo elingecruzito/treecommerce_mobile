@@ -216,7 +216,7 @@ class _ProductPageState extends State<ProductPage> {
             borderRadius: BorderRadius.circular(5.0)
           ),
           elevation: 0.0,
-          onPressed: () => print('Comprar ${ _producto.name }!'),
+          onPressed: () => Navigator.pushNamed(context, 'buy_directions', arguments: _producto),
         ),
         RaisedButton(
           color: Colors.teal[100],

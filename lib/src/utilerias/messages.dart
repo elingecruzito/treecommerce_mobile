@@ -22,4 +22,8 @@ class Messages{
 
   final String MESSAGE_ALERT_COUNT = 'Cantidad incorrecta!';
 
+//----------------------------------------------------------------------------------------------
+
+  final String DIRECTIONS_ERROR_SELECTED = 'Debes seleccionar una direccion.';
+
 }

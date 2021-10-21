@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/account_page.dart';
+import 'package:treecommerce/src/pages/buy_directions_page.dart';
 import 'package:treecommerce/src/pages/buys_page.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           'offers' : (BuildContext context) => OffersPage(),
           'inspirated' : (BuildContext context) => InspiratedPage(),
           'product' : (BuildContext context) => ProductPage(),
+          'buy_directions' : (BuildContext context) => BuyDirectionsPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

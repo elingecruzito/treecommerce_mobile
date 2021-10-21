@@ -29,6 +29,8 @@ class Directions{
   String path_valoration_all = '/valorations/all';
   String path_valoration_positives = '/valorations/positives';
   String path_valoration_negatives = '/valorations/negatives';
+
+  String path_directions_list = '/directions/list';
   
 
 }
