@@ -60,7 +60,7 @@ class _BuysPageState extends State<BuysPage> {
 
   Widget _itemBuy(BuysModel _item) {
     return GestureDetector(
-      onTap: () => print('Notificacion #${_item.g03Id}'),
+      onTap: () => print('Notificacion #${_item.id}'),
       child: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -77,13 +77,14 @@ class _BuysPageState extends State<BuysPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text( 
-                  _buysBloc.getState(_item.g03State),
+                  _buysBloc.getState(_item.idStatus),
                   style: TextStyle(
-                    color: _item.g03State == 5 || _item.g03State == 0 ? Colors.red : Colors.grey
+                    color: _item.idStatus == 5 || _item.idStatus == 0 ? Colors.red : Colors.grey
                   ),
                 ),
                 Text(
-                  parseDate(_item.g02Date),
+                  // parseDate(_item.dateCreated),
+                  "",
                   style: TextStyle(color: Colors.grey[700]),
                 )
               ],

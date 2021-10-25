@@ -6,6 +6,8 @@ List<ProductosModel> productosListModelFromJson(String str) => List<ProductosMod
 
 String productosModelToJson(ProductosModel data) => json.encode(data.toJson());
 
+List<String> productosListModelToJson(List<ProductosModel> data) => data.map((item) => productosModelToJson(item)).toList();
+
 class ProductosModel {
     ProductosModel({
         this.id,
@@ -51,7 +53,7 @@ class ProductosModel {
 
         id_category: json["id_category"],
         provider: json["provider"],
-        valorarion: double.parse(json["valoration"]),
+        valorarion: double.parse(json["valoration"].toString()),
         count_valoration: json["count_valoration"],
 
         favorite: json["favorite"] == 1 ? true : false,

@@ -30,10 +30,10 @@ class BuysBloc{
     final _buys = List<BuysModel>.generate(
       Random().nextInt(99), 
       (index) => BuysModel(
-        g03Id: index,
-        g03State: Random().nextInt(6),
-        g02Date: DateTime.now(),
-        g01Id: Random().nextInt(99)
+        id: index,
+        idStatus: Random().nextInt(6),
+        dateCreated: DateTime.now().toString(),
+        idUser: Random().nextInt(99)
       )
     );
 

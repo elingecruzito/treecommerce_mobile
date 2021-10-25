@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/model/user_model.dart';
 
 class UserPreferences{
@@ -12,6 +13,8 @@ class UserPreferences{
   UserPreferences._internal();
 
   SharedPreferences _prefs;
+
+  List<ProductosModel> _list_productos;
 
   initPrefs() async{
     this._prefs = await SharedPreferences.getInstance();  
@@ -44,6 +47,9 @@ class UserPreferences{
     return _prefs.getKeys().isEmpty;
   }
 
+
+//---------------------Stock--------------------------------
+
   setCount(int _count){
     _prefs.setInt("count", _count);
   }
@@ -51,6 +57,20 @@ class UserPreferences{
   get count{
     return _prefs.getInt("count");
   }
+  
+//----------------------------------------------------------
+
+  // setListProducts(ProductosModel _producto){
+  //   if( _list_productos == null){
+  //     _list_productos = new List<ProductosModel>();
+  //   }
+  //   _list_productos.add(_producto);
+  //   _prefs.setStringList('products', productosListModelToJson(_list_productos));
+  // }
+
+  // get listProducts{
+  //   return productosListModelFromJson(_prefs.getStringList('products').toString());
+  // }
 
   destroy(){
     _prefs.clear();

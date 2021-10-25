@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:treecommerce/src/model/buy_arguments_model.dart';
 import 'package:treecommerce/src/model/directions_model.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/directions_service.dart';
 import 'package:treecommerce/src/utilerias/messages.dart';
@@ -19,12 +21,16 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
   DirectionsService _directionsService;
   UserPreferences _userPreferences;
   int _selected = 0;
+  ProductosModel _productosModel;
+  List<DirectionsModel> _listDirection;
 
   @override
   Widget build(BuildContext context) {
 
     _directionsService = Provider.directionsService(context);
     _userPreferences = Provider.userPreferences(context);
+
+    _productosModel = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -66,12 +72,13 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
       future: _directionsService.getListDirections(_userPreferences),
       builder: (BuildContext context, AsyncSnapshot<List<DirectionsModel>> snapshot) {
         if( snapshot.hasData ){
+          _listDirection = snapshot.data;
           return Container(
             padding: EdgeInsets.fromLTRB(0, 10.0, 15.0, 0),
             child: ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index){
-                return _item(snapshot.data[index]);
+                return _item(snapshot.data[index], index);
               }
             ),
           );
@@ -83,14 +90,14 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
     
   }
 
-  Widget _item(DirectionsModel data) {
+  Widget _item(DirectionsModel data, int index) {
     
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5.0),
       child: Row(
         children: [
           Radio(
-            value: data.id, 
+            value: index, 
             groupValue: _selected, 
             onChanged: (int value){
               setState(() {
@@ -115,7 +122,7 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text('${data.address}, CP: ${ data.cp }, ${data.state}, ${data.country}'),
+                  Text('${data.address} - C.P. ${ data.cp } - ${data.state}, ${data.country}'),
                   SizedBox(height: 10),
                   Text('${data.person} - ${ data.phone }'),
                 ],
@@ -129,7 +136,7 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
 
   _submit() {
     if( _selected != 0 ){
-      print('Selected ${ _selected }!!!');
+      Navigator.pushNamed(context, 'complete_buy', arguments: BuyArguments(_productosModel, _listDirection[_selected]));
     }else{
       errorAlert(context, Messages().TITLE_ERROR, Messages().DIRECTIONS_ERROR_SELECTED);
     }

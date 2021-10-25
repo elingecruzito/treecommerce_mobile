@@ -6,28 +6,36 @@ String buysModelToJson(BuysModel data) => json.encode(data.toJson());
 
 class BuysModel {
     BuysModel({
-        this.g03Id,
-        this.g03State,
-        this.g02Date,
-        this.g01Id,
+        this.id,
+        this.idUser,
+        this.idStatus,
+        this.idDirection,
+        this.total,
+        this.dateCreated,
     });
 
-    int g03Id;
-    int g03State;
-    DateTime g02Date;
-    int g01Id;
+    int id;
+    int idUser;
+    int idStatus;
+    int idDirection;
+    int total;
+    String dateCreated;
 
     factory BuysModel.fromJson(Map<String, dynamic> json) => BuysModel(
-        g03Id: json["g03_id"],
-        g03State: json["g03_state"],
-        g02Date: json["g02_date"],
-        g01Id: json["g01_id"],
+        id: int.parse(json["id"].toString()),
+        idUser: int.parse(json["id_user"].toString()),
+        idStatus: int.parse(json["id_status"].toString()),
+        idDirection: int.parse(json["id_direction"].toString()),
+        total: int.parse(json["total"].toString()),
+        dateCreated: json["date_created"],
     );
 
     Map<String, dynamic> toJson() => {
-        "g03_id": g03Id,
-        "g03_state": g03State,
-        "g02_date": g02Date,
-        "g01_id": g01Id,
+        "id": id,
+        "id_user": idUser,
+        "id_status": idStatus,
+        "id_direction": idDirection,
+        "total": total,
+        "date_created": dateCreated,
     };
 }

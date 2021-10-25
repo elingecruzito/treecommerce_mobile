@@ -31,6 +31,8 @@ class Directions{
   String path_valoration_negatives = '/valorations/negatives';
 
   String path_directions_list = '/directions/list';
+
+  String path_buys_add = '/buy/add';
   
 
 }
