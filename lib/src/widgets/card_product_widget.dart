@@ -3,6 +3,7 @@ import 'package:treecommerce/src/model/galery_model.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/utilerias/utils.dart';
 
 class CardProduct extends StatelessWidget {
   
@@ -38,18 +39,21 @@ class CardProduct extends StatelessWidget {
         child: Row(
           children: [
             _renderImage(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text( 
-                  this.producto.name,
-                  style: TextStyle(
-                    fontSize: 15.0
-                  ),
-                ), 
-                _price(),
-                
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text( 
+                    this.producto.name,
+                    style: TextStyle(
+                      fontSize: 15.0
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ), 
+                  _price(),
+                  
+                ],
+              ),
             )
           ]
         ),
@@ -101,7 +105,7 @@ class CardProduct extends StatelessWidget {
       return Row(
         children: [
           Text( 
-            "\$ ${ producto.total }",
+            "\$ ${ moneyFormat(producto.total) }",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18.0
@@ -118,7 +122,7 @@ class CardProduct extends StatelessWidget {
       );
     }else{
       return Text( 
-        "\$ ${ producto.price }",
+        "\$ ${ moneyFormat(producto.price) }",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18.0

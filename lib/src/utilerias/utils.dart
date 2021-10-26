@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/widgets/card_product_widget.dart';
+import 'package:intl/intl.dart';
 
 final _decorationGradient = BoxDecoration(
   gradient: LinearGradient(
@@ -109,6 +110,11 @@ Widget _buscador(BuildContext context){
 String parseDate(DateTime _time){
   final _months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   return '${_time.day} de ${ _months[ _time.month + 1 ] }';
+}
+
+String moneyFormat(double _price){
+  final _format = NumberFormat("###,###,###.00#", "en_US");
+  return _format.format(_price);
 }
 
 Widget getLoader(){

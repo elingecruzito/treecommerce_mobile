@@ -171,7 +171,7 @@ class _ProductPageState extends State<ProductPage> {
         // Si precio si cuenta con un descuento
         _producto.porcentage > 0 ?
         Text(
-          '\$${ _producto.price }',
+          '\$${ moneyFormat(_producto.price) }',
           style: TextStyle(
             color: Colors.grey,
             fontSize: 14.0,
@@ -183,7 +183,7 @@ class _ProductPageState extends State<ProductPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '\$ ${_producto.total} ',
+              '\$ ${ moneyFormat(_producto.total ) } ',
               style: TextStyle(
                 fontSize: 25.0
               ),

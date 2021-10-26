@@ -4,6 +4,7 @@ import 'package:treecommerce/src/model/galery_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/buys_service.dart';
 import 'package:treecommerce/src/utilerias/user_preferences.dart';
+import 'package:treecommerce/src/utilerias/utils.dart';
 
 class CompleteBuyPage extends StatefulWidget {
   CompleteBuyPage({Key key}) : super(key: key);
@@ -156,7 +157,7 @@ class _CompleteBuyPageState extends State<CompleteBuyPage> {
         children: [
           Icon(Icons.attach_money_rounded, size: 35.0, color: Colors.grey),
           SizedBox(height: 10.0),
-          Text('Paga \$${ ( _arguments.product.price * _preferences.count) }', style: TextStyle(fontSize: 15.0)),
+          Text('Paga \$${ moneyFormat(( _arguments.product.price * _preferences.count)) }', style: TextStyle(fontSize: 15.0)),
           SizedBox(height: 10.0),
           Text('No demores en pagar, solo podemos reservarte stock cuando el pago se acredite', style: TextStyle(color: Colors.grey), textAlign: TextAlign.center)
         ],

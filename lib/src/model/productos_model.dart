@@ -60,7 +60,7 @@ class ProductosModel {
         porcentage: json["percentage"],
         total: json["percentage"] == 0 ? 
                 double.parse(json["price"].toString()) : 
-                (double.parse(json["price"].toString()) - ( double.parse(json["price"].toString()) * ( json["percentage"] / 100) ) ).roundToDouble(),
+                (double.parse(json["price"].toString()) - ( double.parse(json["price"].toString()) * ( json["percentage"] / 100) ) ),
     );
 
     Map<String, dynamic> toJson() => {
