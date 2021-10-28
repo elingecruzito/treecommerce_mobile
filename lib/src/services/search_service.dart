@@ -11,7 +11,9 @@ class SearchService{
       'token' : _preferences.token,
       'searching' : text
     }).then((value) {
-      return productosListModelFromJson(value.body);
+      if(value.code == 200)
+        return productosListModelFromJson(value.body);
+      return null;
     });
     
   }

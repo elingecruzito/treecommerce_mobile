@@ -12,7 +12,9 @@ class WatchedService{
       Directions().path_watched_list,{
       'token' : _preferences.token
     }).then((value) {
-      return productosListModelFromJson(value.body);
+      if(value.code == 200)
+        return productosListModelFromJson(value.body);
+      return null;
     });
     
   }
@@ -24,7 +26,9 @@ class WatchedService{
       'token' : _preferences.token,
       'id' : _product.toString()
     }).then((value) {
-      return productosModelFromJson(value.body);
+      if(value.code == 200)
+        return productosModelFromJson(value.body);
+      return null;
     });
     
   }

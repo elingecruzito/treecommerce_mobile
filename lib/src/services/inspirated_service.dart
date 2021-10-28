@@ -13,7 +13,9 @@ class InspiratedService{
       Directions().path_inspirated_list,{
       'token' : _preferences.token
     }).then((value) {
-      return productosListModelFromJson(value.body);
+      if(value.code == 200)
+        return productosListModelFromJson(value.body);
+      return null;
     });
     
   }

@@ -10,7 +10,9 @@ class ProductService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return productosModelFromJson(value.body);
+      if(value.code == 200)
+        return productosModelFromJson(value.body);
+      return null;
     });
   }
 
@@ -20,7 +22,9 @@ class ProductService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return productosListModelFromJson(value.body);
+      if(value.code == 200)
+        return productosListModelFromJson(value.body);
+      return null;
     });
   }
 }

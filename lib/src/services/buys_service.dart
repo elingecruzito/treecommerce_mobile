@@ -12,7 +12,9 @@ class BuysServices{
       'count' : count.toString(),
       'direction' : direction.toString(),
     }).then((value){
-      return buysModelFromJson(value.body);
+      if(value.code == 200)
+        return buysModelFromJson(value.body);
+      return null;
     });
   }
 
@@ -20,7 +22,9 @@ class BuysServices{
     return await petition(Directions().path_buys_list, {
       'token' : _preferences.token,
     }).then((value){
-      return buysListModelFromJson(value.body);
+      if(value.code == 200)
+        return buysListModelFromJson(value.body);
+      return null;
     });
   }
 

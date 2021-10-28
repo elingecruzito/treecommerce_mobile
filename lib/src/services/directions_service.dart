@@ -9,7 +9,9 @@ class DirectionsService{
     return await petition(Directions().path_directions_list, {
       'token' : _preferences.token
     }).then((value){
-      return directionsListModelFromJson(value.body);
+      if(value.code == 200)
+        return directionsListModelFromJson(value.body);
+      return null;
     });
   }
 

@@ -12,7 +12,9 @@ class ProvidersService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return providersModelFromJson(value.body);
+      if(value.code == 200)
+        return providersModelFromJson(value.body);
+      return null;
     });
   }
 

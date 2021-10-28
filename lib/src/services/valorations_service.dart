@@ -11,7 +11,9 @@ class ValorationsService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return valorationsModelFromJson(value.body);
+      if(value.code == 200)
+        return valorationsModelFromJson(value.body);
+      return null;
     });
   }
 
@@ -21,7 +23,9 @@ class ValorationsService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return valorationsModelFromJson(value.body);
+      if(value.code == 200)
+        return valorationsModelFromJson(value.body);
+      return null;
     });
   }
 
@@ -31,7 +35,9 @@ class ValorationsService{
       'token' : _preferences.token,
       'id' : id.toString()
     }).then((value) {
-      return valorationsModelFromJson(value.body);
+      if(value.code == 200)
+        return valorationsModelFromJson(value.body);
+      return null;
     });
   }
 
