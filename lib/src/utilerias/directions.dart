@@ -3,7 +3,7 @@ class Directions{
   String path_galery = '/galery';
   String path_cover = '/galery/cover';
 
-  String url_server = "192.168.1.74";
+  String url_server = "192.168.1.76";
   String path_authentificate = "/login/authenticate";
 
   String path_carrucel = "/home/carrucel";
@@ -33,6 +33,7 @@ class Directions{
   String path_directions_list = '/directions/list';
 
   String path_buys_add = '/buy/add';
+  String path_buys_list = '/buy/list';
   
 
 }

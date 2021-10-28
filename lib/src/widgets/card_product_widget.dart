@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/model/galery_model.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
-import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
+import 'package:treecommerce/src/widgets/image_product_widget.dart';
 
 class CardProduct extends StatelessWidget {
   
   CardProduct({ @required this.producto });
 
   ProductosModel producto;
-  GaleryService _galeryService;
 
   @override
   Widget build(BuildContext context) {
-
-    _galeryService = Provider.galeryService(context);
 
     final _border = BorderSide(
       width: 0.5,
@@ -38,7 +35,7 @@ class CardProduct extends StatelessWidget {
         ),
         child: Row(
           children: [
-            _renderImage(),
+            ImageProductWidget(id_product: producto.id),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,44 +57,6 @@ class CardProduct extends StatelessWidget {
       ),
     );
 
-  }
-
-  Widget _renderImage(){
-
-    return FutureBuilder(
-      future: _galeryService.getCover(producto.id),
-      builder: (BuildContext context, AsyncSnapshot<GaleryModel> snapshot){
-        if( snapshot.hasData ){
-          return Image.network(
-            snapshot.data.path, 
-            fit: BoxFit.cover, 
-            height: 120.0,
-            loadingBuilder: (context, child, loadingProgress){
-              if( loadingProgress == null){
-                return child;
-              }else{
-                return Image.asset(
-                  'assets/img/no-image.jpg',
-                  fit: BoxFit.cover, 
-                  height: 120.0,
-                );
-              }
-            },
-            errorBuilder: (context, error, stackTrace) =>
-              Image.asset(
-                  'assets/img/no-image.jpg',
-                  fit: BoxFit.cover, 
-                  height: 120.0,
-                )
-          );
-        }
-        return Image.asset(
-          'assets/img/no-image.jpg',
-          fit: BoxFit.cover, 
-          height: 120.0,
-        );
-      }
-    );
   }
 
   Widget _price() {

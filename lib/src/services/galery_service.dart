@@ -8,7 +8,9 @@ class GaleryService{
     return await petition(Directions().path_galery, {
       'product' : id_product.toString()
     }).then((value){
-      return galeryListModelFromJson(value.body);
+      if( value.code == 200)
+        return galeryListModelFromJson(value.body);
+      return null;
     });
   }
 
@@ -16,7 +18,9 @@ class GaleryService{
     return await petition(Directions().path_cover, {
       'product' : id_product.toString()
     }).then((value){
-      return galeryModelFromJson(value.body);
+      if(value.code == 200)
+        return galeryModelFromJson(value.body);
+      return null;
     });
   }
 

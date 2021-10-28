@@ -1,10 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:treecommerce/src/bloc/buys_bloc.dart';
 import 'package:treecommerce/src/model/buys_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
+import 'package:treecommerce/src/services/buys_service.dart';
+import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
+import 'package:treecommerce/src/widgets/card_view_widget.dart';
+import 'package:treecommerce/src/widgets/image_product_widget.dart';
 
 class BuysPage extends StatefulWidget {
 
@@ -14,12 +17,14 @@ class BuysPage extends StatefulWidget {
 
 class _BuysPageState extends State<BuysPage> {
 
-  BuysBloc _buysBloc;
+  BuysServices _buysServices;
+  UserPreferences _preferences;
 
   @override
   Widget build(BuildContext context) {
 
-    _buysBloc = Provider.buysBloc(context);
+    _buysServices = Provider.buysServices(context);
+    _preferences = Provider.userPreferences(context);
 
 
     return Scaffold(
@@ -40,10 +45,10 @@ class _BuysPageState extends State<BuysPage> {
   Widget _listNotifications() {
     return Container(
       child: FutureBuilder(
-        future: _buysBloc.getBuys( Random().nextInt(999) ),
+        future: _buysServices.list(_preferences),
         builder: (BuildContext context, AsyncSnapshot<List<BuysModel>> snapshot){
           if( !snapshot.hasData ){
-            return CircularProgressIndicator();
+            return getLoader();
           }else{
             List<BuysModel> _items = snapshot.data;
             return ListView.builder(
@@ -59,39 +64,82 @@ class _BuysPageState extends State<BuysPage> {
   }
 
   Widget _itemBuy(BuysModel _item) {
-    return GestureDetector(
-      onTap: () => print('Notificacion #${_item.id}'),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            top: getBorder(),
-            bottom: getBorder(),
-          )
-        ),
-        padding: EdgeInsets.all(20.0),
+
+    return CardView(
+      titleCard: _item.createdAt,
+      contentCard: GestureDetector(
+        onTap: () => print( _item.toJson() ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.network('https://coca-colafemsa.com/wp-content/uploads/2019/11/2.png', width: 70.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text( 
-                  _buysBloc.getState(_item.idStatus),
-                  style: TextStyle(
-                    color: _item.idStatus == 5 || _item.idStatus == 0 ? Colors.red : Colors.grey
+            ImageProductWidget(id_product: _item.idProduct),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text( 
+                    _item.name,
+                    style: TextStyle(
+                      fontSize: 15.0
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Text(
-                  // parseDate(_item.dateCreated),
-                  "",
-                  style: TextStyle(color: Colors.grey[700]),
-                )
-              ],
+                  Text( 
+                    _item.status,
+                    style: TextStyle(
+                      color: _item.idStatus == 5 || _item.idStatus == 0 ? Colors.red : Colors.grey
+                    ),
+                  ),
+                ],
+              ),
             )
           ]
-        )
+        ),
       ),
     );
+
+    // return GestureDetector(
+    //   onTap: () => print('Notificacion #${_item.id}'),
+    //   child: Container(
+    //     decoration: BoxDecoration(
+    //       border: Border(
+    //         top: getBorder(),
+    //         bottom: getBorder(),
+    //       )
+    //     ),
+    //     padding: EdgeInsets.all(20.0),
+    //     child: Row(
+    //       mainAxisSize: MainAxisSize.min,
+    //       children: [
+    //         ImageProductWidget(id_product: _item.idProduct),
+    //         Expanded(
+    //           child: Column(
+    //             crossAxisAlignment: CrossAxisAlignment.start,
+    //             children: [
+    //               Text( 
+    //                 _item.name,
+    //                 style: TextStyle(
+    //                   fontSize: 15.0
+    //                 ),
+    //                 overflow: TextOverflow.ellipsis,
+    //               ),
+    //               Text( 
+    //                 _item.status,
+    //                 style: TextStyle(
+    //                   color: _item.idStatus == 5 || _item.idStatus == 0 ? Colors.red : Colors.grey
+    //                 ),
+    //               ),
+    //               Text(
+    //                 // parseDate(_item.dateCreated),
+    //                 parseDate(DateTime.parse(_item.createdAt)),
+    //                 style: TextStyle(color: Colors.grey[700]),
+    //               )
+    //             ],
+    //           ),
+    //         )
+    //       ]
+    //     )
+    //   ),
+    // );
   }
 }

@@ -17,14 +17,15 @@ Future<RequestModel> petition(String path, Map<String, String> params) async {
   }finally{
     client.close();
   }
-  print('POST: ' + Directions().url_server + path + ' -> ' + resp.statusCode.toString());
+  print('Code: ${resp.statusCode} | POST: ${Directions().url_server + path} | Params: ${ params.toString() }');
+
   if( resp != null ){
     if(resp.statusCode == 200){
       return requestModelFromJson(resp.body);
     }
   }
 
-  return new RequestModel(code: 500, message: 'El servidor ha encontrado una situación que no sabe cómo manejarla');
+  return new RequestModel(code: resp.statusCode, message: 'El servidor ha encontrado una situación que no sabe cómo manejarla', body: "[]");
 }
 
 Future<RequestGetModel> petitionGet(String path) async{
@@ -38,13 +39,13 @@ Future<RequestGetModel> petitionGet(String path) async{
   }finally{
     client.close();
   }
-  print('GET: ' + Directions().url_server + path + ' -> ' + resp.statusCode.toString());
-  if( resp != null ){
+  print('Code: ${resp.statusCode} | GET: ${Directions().url_server + path}');
+if( resp != null ){
     if(resp.statusCode == 200){
       return requestGetModelFromJson(resp.body);
     }
   }
 
-  return new RequestGetModel(code: 500, message: 'El servidor ha encontrado una situación que no sabe cómo manejarla');
+  return new RequestGetModel(code: resp.statusCode, message: 'El servidor ha encontrado una situación que no sabe cómo manejarla', body: []);
 
 }

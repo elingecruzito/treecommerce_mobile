@@ -16,4 +16,12 @@ class BuysServices{
     });
   }
 
+  Future<List<BuysModel>> list(UserPreferences _preferences) async{
+    return await petition(Directions().path_buys_list, {
+      'token' : _preferences.token,
+    }).then((value){
+      return buysListModelFromJson(value.body);
+    });
+  }
+
 }
