@@ -6,7 +6,7 @@ import 'package:treecommerce/src/utilerias/user_preferences.dart';
 
 class ProvidersService{
 
-  Future<ProvidersModel> getProduct(UserPreferences _preferences, int id) async{
+  Future<ProvidersModel> getProviderByProduct(UserPreferences _preferences, int id) async{
     return await petition(
       Directions().path_privider_product,{
       'token' : _preferences.token,

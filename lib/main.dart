@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/account_page.dart';
 import 'package:treecommerce/src/pages/buy_directions_page.dart';
+import 'package:treecommerce/src/pages/buy_page.dart';
 import 'package:treecommerce/src/pages/buys_page.dart';
 import 'package:treecommerce/src/pages/complete_buy_page.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           'product' : (BuildContext context) => ProductPage(),
           'buy_directions' : (BuildContext context) => BuyDirectionsPage(),
           'complete_buy' : (BuildContext context) => CompleteBuyPage(),
+          'buy' : (BuildContext context) => BuyPage(),
         },
         theme: ThemeData(
           primaryColor: global_color, 

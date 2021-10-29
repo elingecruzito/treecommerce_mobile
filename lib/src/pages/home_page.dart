@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/home_service.dart';
@@ -19,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  HomeBloc _homeBloc;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   HomeService _homeService;
   List list = [];
@@ -28,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    _homeBloc = Provider.homeBloc(context);
     _homeService =  Provider.homeService(context);
     _preferences = Provider.userPreferences(context);
 

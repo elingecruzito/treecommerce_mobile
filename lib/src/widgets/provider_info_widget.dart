@@ -17,7 +17,7 @@ class ProviderInfoWidget extends StatelessWidget {
     final _preferences = Provider.userPreferences(context);
 
     return FutureBuilder(
-      future: _providersService.getProduct(_preferences, idProduct),
+      future: _providersService.getProviderByProduct(_preferences, idProduct),
       builder: (BuildContext context, AsyncSnapshot<ProvidersModel> snapshot) {
         if( snapshot.hasData ){
           return Column(

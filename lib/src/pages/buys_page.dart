@@ -68,7 +68,7 @@ class _BuysPageState extends State<BuysPage> {
     return CardView(
       titleCard: _item.createdAt,
       contentCard: GestureDetector(
-        onTap: () => print( _item.toJson() ),
+        onTap: () => Navigator.pushNamed(context, 'buy', arguments: _item),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:treecommerce/src/bloc/home_bloc.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
 import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/bloc/product_bloc.dart';
@@ -22,7 +21,6 @@ import 'package:treecommerce/src/utilerias/user_preferences.dart';
 class Provider extends InheritedWidget {
 
   final _loginBloc = new LoginBloc();
-  final _homeBloc = new HomeBloc();
   final _searchBloc = new SearchBloc();
   final _notificationsBloc = new NotificationsBloc();
   final _userPreferences = new UserPreferences();
@@ -61,9 +59,6 @@ class Provider extends InheritedWidget {
 
   static LoginBloc loginBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._loginBloc;
-
-  static HomeBloc homeBloc(BuildContext context)
-    => context.dependOnInheritedWidgetOfExactType<Provider>()._homeBloc;
 
   static SearchBloc searchBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._searchBloc;
