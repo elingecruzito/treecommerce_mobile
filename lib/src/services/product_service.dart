@@ -27,4 +27,15 @@ class ProductService{
       return null;
     });
   }
+
+  Future<List<ProductosModel>> getFavoritesProducts(UserPreferences _preferences) async{
+    return await petition(
+      Directions().path_favorites_products,{
+      'token' : _preferences.token,
+    }).then((value) {
+      if(value.code == 200)
+        return productosListModelFromJson(value.body);
+      return null;
+    });
+  }
 }

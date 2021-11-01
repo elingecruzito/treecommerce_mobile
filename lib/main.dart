@@ -5,6 +5,7 @@ import 'package:treecommerce/src/pages/buy_page.dart';
 import 'package:treecommerce/src/pages/buys_page.dart';
 import 'package:treecommerce/src/pages/complete_buy_page.dart';
 import 'package:treecommerce/src/pages/error_page.dart';
+import 'package:treecommerce/src/pages/favorites_page.dart';
 import 'package:treecommerce/src/pages/home_page.dart';
 import 'package:treecommerce/src/pages/inspirated_page.dart';
 import 'package:treecommerce/src/pages/launcher_page.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           'buy_directions' : (BuildContext context) => BuyDirectionsPage(),
           'complete_buy' : (BuildContext context) => CompleteBuyPage(),
           'buy' : (BuildContext context) => BuyPage(),
+          'favorites' : (BuildContext context) => FavoritesPage()
         },
         theme: ThemeData(
           primaryColor: global_color, 

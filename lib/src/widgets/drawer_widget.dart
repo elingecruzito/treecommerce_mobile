@@ -140,7 +140,7 @@ class _DrawerCustomState extends State<DrawerCustom> {
       {
         "title" : "Fravoritos",
         "icon" : Icons.favorite_border_outlined,
-        "route" : "error"
+        "route" : "favorites"
       },
       {
         "title" : "Ofertas",
