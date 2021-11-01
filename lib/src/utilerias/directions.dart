@@ -6,6 +6,8 @@ class Directions{
   String url_server = "192.168.1.76";
   String path_authentificate = "/login/authenticate";
 
+  String path_launcher = '/home/launcher';
+
   String path_carrucel = "/home/carrucel";
   String path_last_view = "/home/lastView";
   String path_offers = '/home/offers';
