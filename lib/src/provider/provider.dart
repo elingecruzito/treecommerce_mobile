@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:treecommerce/src/bloc/login_bloc.dart';
-import 'package:treecommerce/src/bloc/notifications_bloc.dart';
 import 'package:treecommerce/src/bloc/product_bloc.dart';
 import 'package:treecommerce/src/bloc/search_bloc.dart';
 import 'package:treecommerce/src/services/buys_service.dart';
@@ -9,6 +8,7 @@ import 'package:treecommerce/src/services/galery_service.dart';
 import 'package:treecommerce/src/services/home_service.dart';
 import 'package:treecommerce/src/services/inspirated_service.dart';
 import 'package:treecommerce/src/services/login_service.dart';
+import 'package:treecommerce/src/services/notifications_service.dart';
 import 'package:treecommerce/src/services/offers_service.dart';
 import 'package:treecommerce/src/services/product_service.dart';
 import 'package:treecommerce/src/services/providers_service.dart';
@@ -22,7 +22,6 @@ class Provider extends InheritedWidget {
 
   final _loginBloc = new LoginBloc();
   final _searchBloc = new SearchBloc();
-  final _notificationsBloc = new NotificationsBloc();
   final _userPreferences = new UserPreferences();
   final _messages = new Messages();
   final _productBloc = new ProductBloc();
@@ -39,6 +38,7 @@ class Provider extends InheritedWidget {
   final _watchedService = new WatchedService();
   final _directionsService = new DirectionsService();
   final _buysService = new BuysServices();
+  final _notificationsService = new NotificationsService();
 
   static Provider _instancia;
   factory Provider({Key key, Widget child}){
@@ -62,9 +62,6 @@ class Provider extends InheritedWidget {
 
   static SearchBloc searchBloc(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._searchBloc;
-
-  static NotificationsBloc notificationsBloc(BuildContext context) 
-    => context.dependOnInheritedWidgetOfExactType<Provider>()._notificationsBloc;
 
   static UserPreferences userPreferences(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._userPreferences;
@@ -109,5 +106,8 @@ class Provider extends InheritedWidget {
 
   static BuysServices buysServices(BuildContext context)
     => context.dependOnInheritedWidgetOfExactType<Provider>()._buysService;
+
+  static NotificationsService notificationsService(BuildContext context)
+    => context.dependOnInheritedWidgetOfExactType<Provider>()._notificationsService;
 
 }

@@ -37,6 +37,8 @@ class Directions{
 
   String path_buys_add = '/buy/add';
   String path_buys_list = '/buy/list';
+
+  String path_notifications_list = '/notifications/list';
   
 
 }

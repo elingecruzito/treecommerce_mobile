@@ -1,33 +1,43 @@
 import 'dart:convert';
 
-NotificationsModel notificationsModelFromJson(String str) => NotificationsModel.fromJson(json.decode(str));
+import 'package:treecommerce/src/utilerias/utils.dart';
 
-String notificationsModelToJson(NotificationsModel data) => json.encode(data.toJson());
+List<NotificationsModel> notificationsListModelFromJson(String str) => List<NotificationsModel>.from(json.decode(str).map((x) => NotificationsModel.fromJson(x)));
+
+String notificationsListModelToJson(List<NotificationsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class NotificationsModel {
     NotificationsModel({
-        this.g02Id,
-        this.g02Title,
-        this.g02Desc,
-        this.g02Imagen,
+        this.id,
+        this.type,
+        this.title,
+        this.message,
+        this.readed,
+        this.createdAt,
     });
 
-    int g02Id;
-    String g02Title;
-    String g02Desc;
-    String g02Imagen;
+    int id;
+    int type;
+    String title;
+    String message;
+    int readed;
+    String createdAt;
 
     factory NotificationsModel.fromJson(Map<String, dynamic> json) => NotificationsModel(
-        g02Id: json["g02_id"],
-        g02Title: json["g02_title"],
-        g02Desc: json["g02_desc"],
-        g02Imagen: json["g02_imagen"],
+        id: int.parse(json["id"].toString()),
+        type: int.parse(json["type"].toString()),
+        title: json["title"],
+        message: json["message"],
+        readed: int.parse(json["readed"].toString()),
+        createdAt: parseDate(DateTime.parse(json["created_at"])),
     );
 
     Map<String, dynamic> toJson() => {
-        "g02_id": g02Id,
-        "g02_title": g02Title,
-        "g02_desc": g02Desc,
-        "g02_imagen": g02Imagen,
+        "id": id,
+        "type": type,
+        "title": title,
+        "message": message,
+        "readed": readed,
+        "created_at": createdAt,
     };
 }

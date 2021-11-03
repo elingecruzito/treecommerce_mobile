@@ -145,13 +145,13 @@ class _DrawerCustomState extends State<DrawerCustom> {
       {
         "title" : "Ofertas",
         "icon" : Icons.local_offer_outlined,
-        "route" : "error"
+        "route" : "offers"
       },
-      {
-        "title" : "Historial",
-        "icon" : Icons.access_alarms_outlined,
-        "route" : "error"
-      },
+      // {
+      //   "title" : "Historial",
+      //   "icon" : Icons.access_alarms_outlined,
+      //   "route" : "error"
+      // },
       {
         "title" : "Mi cuenta",
         "icon" : Icons.person_outline,
