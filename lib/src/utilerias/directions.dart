@@ -26,6 +26,7 @@ class Directions{
   String path_pruduct = '/products/product';
   String path_pruduct_by_provider = '/products/provider';
   String path_favorites_products = '/products/favorites';
+  String path_product_favorite = '/products/favorite';
 
   String path_privider_product = '/providers/product';
 

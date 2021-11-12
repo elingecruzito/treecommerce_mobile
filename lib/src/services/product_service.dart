@@ -38,4 +38,17 @@ class ProductService{
       return null;
     });
   }
+
+  Future<bool> setFavoriteValue(UserPreferences _preferences, int id_product, int value) async{
+    return await petition(
+      Directions().path_product_favorite,{
+      'token' : _preferences.token,
+      'id_product' : id_product.toString(),
+      'value' : value.toString()
+    }).then((value) {
+      if(value.code == 200)
+        return value.body == "1" ? true : false;
+      return false;
+    });
+  }
 }
