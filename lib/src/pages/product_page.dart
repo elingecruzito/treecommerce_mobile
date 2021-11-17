@@ -61,7 +61,13 @@ class _ProductPageState extends State<ProductPage> {
               _producto.favorite ? Icons.favorite : Icons.favorite_border_outlined, 
               color: Colors.white
             ), 
-            onPressed: () => print(_producto.id),
+            onPressed: () async {
+              var value = !_producto.favorite ? 1 : 0;
+              bool result = await _service.setFavoriteValue(_preferences, _producto.id, value);
+              if( result ){
+                setState(() => _producto.favorite = !_producto.favorite);
+              }
+            },
             iconSize: _sizeIcons,
           ),
           IconButton(
