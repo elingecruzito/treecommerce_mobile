@@ -34,6 +34,7 @@ dependencies:
   http:
   shared_preferences:
   intl:
+  flutter_multi_formatter:
 
 dev_dependencies:
   flutter_test:

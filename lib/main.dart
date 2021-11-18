@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/pages/account_page.dart';
+import 'package:treecommerce/src/pages/add_direction_page.dart';
 import 'package:treecommerce/src/pages/buy_directions_page.dart';
 import 'package:treecommerce/src/pages/buy_page.dart';
 import 'package:treecommerce/src/pages/buys_page.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           'inspirated' : (BuildContext context) => InspiratedPage(),
           'product' : (BuildContext context) => ProductPage(),
           'buy_directions' : (BuildContext context) => BuyDirectionsPage(),
+          'add_direction' : (BuildContext context) => AddDirectionPage(),
           'complete_buy' : (BuildContext context) => CompleteBuyPage(),
           'buy' : (BuildContext context) => BuyPage(),
           'favorites' : (BuildContext context) => FavoritesPage()

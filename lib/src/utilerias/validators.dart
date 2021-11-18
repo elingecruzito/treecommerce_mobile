@@ -22,4 +22,24 @@ class Validators{
       }
     }
   );
+
+  final isCp = StreamTransformer<String, String>.fromHandlers(
+    handleData: (txt, sink){
+      if( !txt.isEmpty && txt.length == "00000".length ){
+        sink.add(txt);
+      }else{
+        sink.addError("El valor capturado no es valido!");
+      }
+    }
+  );
+
+  final isPhone = StreamTransformer<String, String>.fromHandlers(
+    handleData: (txt, sink){
+      if( !txt.isEmpty && txt.length == "###-###-##-##".length ){
+        sink.add(txt);
+      }else{
+        sink.addError("El valor capturado no es valido!");
+      }
+    }
+  );
 }

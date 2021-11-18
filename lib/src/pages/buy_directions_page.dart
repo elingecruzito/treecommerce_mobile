@@ -39,6 +39,12 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
           color: Colors.white,
           size: _sizeIcons
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+            onPressed: () => Navigator.pushNamed(context, 'add_direction'),
+          )
+        ],
       ),
       body: Column(
         children: [

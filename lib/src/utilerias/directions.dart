@@ -35,6 +35,9 @@ class Directions{
   String path_valoration_negatives = '/valorations/negatives';
 
   String path_directions_list = '/directions/list';
+  String path_estados_list = '/directions/states';
+  String path_municipios_list = '/directions/countrys';
+  String path_add_direction = '/directions/add';
 
   String path_buys_add = '/buy/add';
   String path_buys_list = '/buy/list';
