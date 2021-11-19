@@ -2,6 +2,8 @@ import 'dart:convert';
 
 List<DirectionsModel> directionsListModelFromJson(String str) => List<DirectionsModel>.from(json.decode(str).map((x) => DirectionsModel.fromJson(x)));
 
+DirectionsModel directionsModelFromJson(String str) => DirectionsModel.fromJson(json.decode(str));
+
 String directionsModelToJson(List<DirectionsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DirectionsModel {

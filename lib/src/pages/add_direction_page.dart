@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:treecommerce/src/bloc/direction_bloc.dart';
+import 'package:treecommerce/src/model/buy_arguments_model.dart';
+import 'package:treecommerce/src/model/directions_model.dart';
 import 'package:treecommerce/src/model/estados_model.dart';
 import 'package:treecommerce/src/model/municipios_model.dart';
+import 'package:treecommerce/src/model/productos_model.dart';
 import 'package:treecommerce/src/provider/provider.dart';
 import 'package:treecommerce/src/services/directions_service.dart';
+import 'package:treecommerce/src/utilerias/messages.dart';
 import 'package:treecommerce/src/utilerias/user_preferences.dart';
 import 'package:treecommerce/src/utilerias/utils.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
@@ -19,6 +23,8 @@ class _AddDirectionPageState extends State<AddDirectionPage> {
   DirectionBloc _directionBloc;
   UserPreferences _preferences;
   DirectionsService _directionsService;
+
+  ProductosModel _productosModel;
   
   int _stateValue = 0;
   int _countryValue = 0;
@@ -32,10 +38,14 @@ class _AddDirectionPageState extends State<AddDirectionPage> {
     _preferences = Provider.userPreferences(context);
     _directionsService = Provider.directionsService(context);
 
+    _productosModel = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: simpleAppBar(context, 'Nueva direccion'),
-      body: SafeArea(
-        child: _addForm(),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: _addForm()
+        ),
       ),
     );
   }
@@ -210,7 +220,7 @@ class _AddDirectionPageState extends State<AddDirectionPage> {
   }
 
   Widget _buttomSubmit() {
-    return StreamBuilder<Object>(
+    return StreamBuilder(
       stream: _directionBloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot){
         return RaisedButton(
@@ -223,8 +233,23 @@ class _AddDirectionPageState extends State<AddDirectionPage> {
             borderRadius: BorderRadius.circular(5.0)
           ),
           elevation: 0.0,
-          onPressed: () {
-            print('Envio...!');
+          onPressed: () async {
+            if( snapshot.hasData ){
+              loaderAlert(context);
+              final DirectionsModel _newDirection = await _directionsService.add(
+                _preferences, 
+                _stateValue == 0 ? 1 : _stateValue, 
+                _countryValue == 0 ? 1 : _countryValue, 
+                _directionBloc.address, 
+                _directionBloc.cp, 
+                _directionBloc.phone, 
+                _directionBloc.person
+              );
+              Navigator.pop(context);
+              Navigator.pushNamed(context, 'complete_buy', arguments: BuyArguments(_productosModel, _newDirection));
+            }else{
+              errorAlert(context, Messages().TITLE_ERROR , Messages().FORM_ERROR_NEW_DIRECTION);
+            }
           }
         );
       }

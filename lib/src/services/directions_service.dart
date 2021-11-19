@@ -38,4 +38,20 @@ class DirectionsService{
     });
   }
 
+  Future<DirectionsModel> add(UserPreferences _preferences, int state, int country, String address, String cp, String phone, String person) async{
+    return await petition(Directions().path_add_direction, {
+      'token' : _preferences.token,
+      'state' : state.toString(),
+      'country' : country.toString(),
+      'address' : address,
+      'cp' : cp,
+      'phone' : phone, 
+      'person' : person
+    }).then((value){
+      if(value.code == 200)
+        return directionsModelFromJson(value.body);
+      return null;
+    });
+  }
+
 }

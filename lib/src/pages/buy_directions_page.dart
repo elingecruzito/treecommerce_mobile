@@ -42,7 +42,7 @@ class _BuyDirectionsPageState extends State<BuyDirectionsPage> {
         actions: [
           IconButton(
             icon: Icon(Icons.add, color: Colors.white),
-            onPressed: () => Navigator.pushNamed(context, 'add_direction'),
+            onPressed: () => Navigator.pushNamed(context, 'add_direction', arguments: _productosModel),
           )
         ],
       ),

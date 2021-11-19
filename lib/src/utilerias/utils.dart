@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:treecommerce/src/model/productos_model.dart';
+import 'package:treecommerce/src/utilerias/messages.dart';
 import 'package:treecommerce/src/widgets/card_product_widget.dart';
 import 'package:intl/intl.dart';
 
@@ -35,6 +36,24 @@ void errorAlert(BuildContext context,String title, String txt) {
             onPressed: (){ Navigator.of(context).pop(); },
           )
         ],
+      );
+    }
+  );
+}
+
+void loaderAlert(BuildContext context){
+  showDialog(
+    context: context,
+    builder: (buildcontext) {
+      return AlertDialog(
+        title: Text(Messages().TITLE_LOADER),
+        content: Container(
+          height: 100.0,
+          child: Center(
+            child: CircularProgressIndicator()
+          )
+        ),
+        actions: null,
       );
     }
   );

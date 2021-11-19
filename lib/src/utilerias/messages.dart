@@ -9,6 +9,7 @@ class Messages{
 //---------------------------------------------------------------------------------------------------
 
   final String TITLE_ERROR = "Error!";
+  final String TITLE_LOADER = 'Cargando...';
 
 //---------------------------------------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ class Messages{
 
 //----------------------------------------------------------------------------------------------
 
-  final String DIRECTIONS_ERROR_SELECTED = 'Debes seleccionar una direccion.';
+  final String DIRECTIONS_ERROR_SELECTED = 'Debes seleccionar una direccion.';  
+  final String FORM_ERROR_NEW_DIRECTION = 'Falta uno o varios datos.';
 
 }
